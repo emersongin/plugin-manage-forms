@@ -1,6 +1,5 @@
 # Plug-in Manage Forms
-Contributors: Emerson Andrey
-
+Contributors: Emerson Andrey  
 Tags: wordpress plugin php wp developer
 
 Donate link: [Here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKCQKEZYNSA4L&source=url)
