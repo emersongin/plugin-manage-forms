@@ -1,30 +1,36 @@
 # Plug-in Manage Forms
 Contributors: Emerson Andrey
+
 Tags: wordpress plugin php wp developer
+
 Donate link: [Here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RKCQKEZYNSA4L&source=url)
 
-Requires at least: versao wordpress
-Tested up to: versão wp de testes do plugin
-Requires PHP: versão php
-License: nome licença
-License URI: link da licença
+Requires at least: Version 5.0 or more WordPress.
 
-curta descrição
+Tested up to: Test with version 5.0 WordPress.
+
+Requires PHP: 5.6 or more.
+
+License: MIT License.
+
+License URI: [Here](https://github.com/emersongin/plugin-manage-forms/blob/master/LICENSE)
+
+plugin wordpress, gerenciador de formulários.
 
 == Description ==
-longa descrição
+Gerenciador de formulário para obter dados de cartão de crédito.
 
 == Installation ==
-comoinstalar
+Active plugin and set config.
 
 == Frequently Asked Questions ==
-perguntas frequentes
+...
 
 == Screenshots ==
 <img src="/ss-adm.png">
 
 == Changelog ==
-log de atualizações
+create project 03.03.20
 
 == Upgrade Notice ==
-noticias de atualização
+create at 03.03.20
