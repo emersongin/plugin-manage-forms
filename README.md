@@ -9,10 +9,8 @@ Requires PHP: 5.6 or more.
 License: MIT License.  
 License URI: [Here](https://github.com/emersongin/plugin-manage-forms/blob/master/LICENSE)  
 
-plugin wordpress, gerenciador de formulários.
-
 ## Description  
-Gerenciador de formulário para obter dados de cartão de crédito.
+manage forms for get card data.
 
 ## Installation    
 Active plugin and set config.
