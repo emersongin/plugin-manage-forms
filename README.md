@@ -11,20 +11,20 @@ License URI: [Here](https://github.com/emersongin/plugin-manage-forms/blob/maste
 
 plugin wordpress, gerenciador de formulários.
 
-== Description ==  
+## Description  
 Gerenciador de formulário para obter dados de cartão de crédito.
 
-== Installation ==  
+## Installation    
 Active plugin and set config.
 
-== Frequently Asked Questions ==  
+##Frequently Asked Questions  
 ...
 
-== Screenshots ==  
+## Screenshots  
 <img src="/ss-adm.png">
 
-== Changelog ==  
+## Changelog
 create project 03.03.20
 
-== Upgrade Notice ==  
+## Upgrade Notice  
 create at 03.03.20
