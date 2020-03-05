@@ -3,16 +3,14 @@
     defined( 'ABSPATH' ) || exit;
 
     class AuthForms_Post_Type extends Custom_Post_Type {
-        private $post_type = '';
         private $meta_boxes = array();
 
         public function __construct() {
-            $this->post_type = 'authforms';
             $this->meta_boxes = array(
                 array(
                     'id' => 'services_meta_box',
                     'title' => __( 'Services', TEXT_DOMAIN ),
-                    'post_type' => $this->post_type,
+                    'post_type' => $this->get_name(),
                     'context' => 'normal',
                     'priority' => 'default',
                     'meta_fields' => array(
@@ -43,7 +41,7 @@
                 array(
                     'id' => 'settings_meta_box',
                     'title' => __( 'Settings', TEXT_DOMAIN ),
-                    'post_type' => $this->post_type,
+                    'post_type' => $this->get_name(),
                     'context' => 'normal',
                     'priority' => 'default',
                     'meta_fields' => array(

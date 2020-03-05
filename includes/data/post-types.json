@@ -1,0 +1,73 @@
+{
+    "auth_forms" : {
+        "name" : "authforms",
+        "labels" : {
+            "name" : "Forms",
+            "singular_name" : "Form",
+            "all_items" : "All forms"
+        },
+        "descrition" : "Auth forms",
+        "public" : true,
+        "menu_postion" : 0,
+        "menu_icon" : "dashicons-admin-page",
+        "supports" : [
+            "title",
+            "editor"
+        ],
+        "meta_boxes" : [
+            {                   
+                "id" : "services_meta_box",
+                "title" : "Services",
+                "context" : "normal",
+                "priority" : "default",
+                "meta_fields" : [
+                    {
+                        "tag" : "input",
+                        "title" : "Service Title",
+                        "input" : {
+                            "id" : "service_title",
+                            "name" : "service_title",
+                            "type" : "text",
+                            "class" : [
+                                "large-text"
+                            ],
+                            "value" : "",
+                            "placeholder" : "title text",
+                            "required" : true
+                        }
+                    }, 
+                    {
+                        "tag" : "list",
+                        "items" : [
+                            {}
+                        ],
+                        "title" : "Service Items"
+                    }
+                ]
+            },
+            {
+                "id" : "settings_meta_box",
+                "title" : "Settings",
+                "context" : "normal",
+                "priority" : "default",
+                "meta_fields" : [
+                    {
+                        "name" : "expiration_time",
+                        "tag" : "select"
+                    },
+                    {
+                        "name" : "service_parcel",
+                        "tag" : "select"
+                    },
+                    {
+                        "name" : "contract_id",
+                        "tag" : "select"
+                    }
+                ]
+            }
+        ]
+    },
+    "terms" : {
+
+    }
+}
