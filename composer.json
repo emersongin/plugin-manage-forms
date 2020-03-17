@@ -1,0 +1,17 @@
+{
+    "name": "andrey/manage-forms",
+    "description": "plugin manager forms",
+    "require": {
+        "vladkens/autoprefixer": "^0.1.0"
+    },
+    "require-dev": {
+        "vladkens/autoprefixer": "^0.1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Emerson Andrey",
+            "email": "emersonandrey_7@hotmail.com"
+        }
+    ]
+}
