@@ -3,56 +3,64 @@
 defined( 'ABSPATH' ) || exit;
 
 class Plugin_Manager {
-    function __construct() {
+    public function __construct() {
         $this->setup();
 
     }
 
-    public function setup() {
-        $this->load_constants();
-        $this->load_class();
-        $this->load_libraries();
-        $this->load_settings();
+    private function setup() {
+        $this->create_constants();
+        $this->create_class();
+        $this->create_libraries();
+        $this->create_settings();
 
     }
 
-    public function load_constants() {
+    private function create_constants() {
         define( 'MG_FORMS_URL', plugins_url( '', MG_FORMS_FILE ) );
         define( 'MG_FORMS_DIR', plugin_dir_path( MG_FORMS_FILE ) );
         define( 'MG_FORMS_ADMIN_URL', admin_url( '', MG_FORMS_FILE ) );
-        
         define( 'MG_FORMS_ASSETS', MG_FORMS_URL . '/assets' );
-
         define( 'TEXT_DOMAIN', 'plugin-manage-forms' );
 
     }
 
-    public function load_class() {
+    private function create_class() {
         //interfaces
-        require_once MG_FORMS_DIR . '/includes/interface/interface-elements.php';
+        // require_once MG_FORMS_DIR . '/includes/interface/interface-elements.php';
         require_once MG_FORMS_DIR . '/includes/interface/interface-script.php';
+        require_once MG_FORMS_DIR . '/includes/interface/interface-script-validator.php';
+        require_once MG_FORMS_DIR . '/includes/interface/interface-script-js-register.php';
+        require_once MG_FORMS_DIR . '/includes/interface/interface-script-js.php';
+        require_once MG_FORMS_DIR . '/includes/interface/interface-style-sheet-register.php';
+        require_once MG_FORMS_DIR . '/includes/interface/interface-style-sheet.php';
+
+        require_once MG_FORMS_DIR . '/includes/interface/interface-post-type.php';
 
         //abstracts
-        require_once MG_FORMS_DIR . '/includes/abstract/abstract-elements.php';
-        require_once MG_FORMS_DIR . '/includes/abstract/abstract-script.php';
+        // require_once MG_FORMS_DIR . '/includes/abstract/abstract-elements.php';
         require_once MG_FORMS_DIR . '/includes/abstract/abstract-custom-post-type.php';
-
+        require_once MG_FORMS_DIR . '/includes/abstract/abstract-script-register.php';
+        require_once MG_FORMS_DIR . '/includes/abstract/abstract-script.php';
+        
         //class
-        require_once MG_FORMS_DIR . '/includes/class/class-script-js.php';
-        require_once MG_FORMS_DIR . '/includes/class/class-style-sheet.php';
+        require_once MG_FORMS_DIR . '/includes/class/scripts/class-script-validator.php';
+        require_once MG_FORMS_DIR . '/includes/class/scripts/class-script-js-register.php';
+        require_once MG_FORMS_DIR . '/includes/class/scripts/class-script-js.php';
+        require_once MG_FORMS_DIR . '/includes/class/scripts/class-style-sheet-register.php';
+        require_once MG_FORMS_DIR . '/includes/class/scripts/class-style-sheet.php';
 
-        //class post types
+        require_once MG_FORMS_DIR . '/includes/class/post-types/class-post-type-register.php';
         require_once MG_FORMS_DIR . '/includes/class/post-types/class-authforms.php';
-        require_once MG_FORMS_DIR . '/includes/class/post-types/class-terms.php';
+        // require_once MG_FORMS_DIR . '/includes/class/post-types/class-terms.php';
 
-        //class elements
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-input.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-items-list.php';
+        // require_once MG_FORMS_DIR . '/includes/class/elements/class-element.php';
+        // require_once MG_FORMS_DIR . '/includes/class/elements/class-input.php';
+        // require_once MG_FORMS_DIR . '/includes/class/elements/class-items-list.php';
 
     }
 
-    public function load_libraries() {
+    private function create_libraries() {
         add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_enqueue_scripts' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'load_wp_enqueue_scripts' ) );
 
@@ -70,86 +78,206 @@ class Plugin_Manager {
 
     }
 
-    public function load_admin_fonts() {
-        $font_awesome = new Style_Sheet();
+    private function load_admin_fonts() {
+        $font_data = array(
+            'name' => 'fonts-awesome',
+            'src' => 'fontawesome-free-5.12.0-web/css/all.min.css',
+            'dependencies' => array(),
+            'version' => '5.12.0',
+            'media' => 'all'
+        );
+        $font_awesome = new Style_Sheet( $font_data );
+        $validator = new Script_Validator();
+        $register = new Style_Sheet_Register();
 
-        $font_awesome->set_name( 'fonts-awesome' );
-        $font_awesome->set_version( '5.12.0' );
-        $font_awesome->set_src( 'fontawesome-free-5.12.0-web/css/all.min.css' );
-        $font_awesome->set_media( 'all' );
-        $font_awesome->register();
-        $font_awesome->enqueue();
+        if( $validator->validate( $font_awesome ) ) {
+            $register->register( $font_awesome );
+            $register->enqueue( $font_awesome );
+
+        }
 
     }
 
     public function load_admin_css() {
-        $style = new Style_Sheet();
+        $style_data = array(
+            'name' => 'admin-style-css',
+            'src' => 'admin-style.css',
+            'dependencies' => array(),
+            'version' => '1.0',
+            'media' => 'all'
+        );
+        $style = new Style_Sheet( $style_data );
+        $validator = new Script_Validator();
+        $register = new Style_Sheet_Register();
 
-        $style->set_name( 'admin-style-css' );
-        $style->set_version( '1.0' );
-        $style->set_src( 'admin-style.css' );
-        $style->set_media( 'all' );
-        $style->register();
-        $style->enqueue();
+        if( $validator->validate( $style ) ) {
+            $register->register( $style );
+            $register->enqueue( $style );
+
+        }
     }
 
     public function load_plugin_css() {
-        $bootstrap = new JS_Script();
-        $style = new JS_Script();
+        $bootstrap_data = array(
+            'name' => 'bootstrap-4-css',
+            'src' => 'bootstrap/bootstrap.min.css',
+            'dependencies' => array(),
+            'version' => '4.4.1',
+            'media' => 'all'
+        );
+        $style_data = array(
+            'name' => 'mgf-style-css',
+            'src' => 'mgf-style.css',
+            'dependencies' => array(),
+            'version' => '1.0',
+            'media' => 'all'
+        );
 
-        $bootstrap->set_name( 'bootstrap-4-css' );
-        $bootstrap->set_version( '4.4.1' );
-        $bootstrap->set_src( 'bootstrap/bootstrap.min.css' );
-        $bootstrap->insert_footer( true );
-        $bootstrap->register();
-        $bootstrap->enqueue();
-        
-        $style->set_name( 'mgf-style-css' );
-        $style->set_version( '1.0' );
-        $style->set_src( 'mgf-style.css' );
-        $style->insert_footer( true );
-        $style->register();
-        $style->enqueue();
+        $bootstrap = new Style_Sheet( $bootstrap_data );
+        $style = new Style_Sheet( $style_data );
+        $validator = new Script_Validator();
+        $register = new Style_Sheet_Register();
+
+        if( $validator->validate( $bootstrap ) ) {
+            $register->register( $bootstrap );
+            $register->enqueue( $bootstrap );
+
+        }
+
+        if( $validator->validate( $style ) ) {
+            $register->register( $style );
+            $register->enqueue( $style );
+
+        }
 
     }
 
     public function load_plugin_scripts() {
-        $bootstrap = new JS_Script();
+        $bootstrap_data = array(
+            'name' => 'bootstrap-4-js',
+            'src' => 'bootstrap/bootstrap.min.js',
+            'dependencies' => array( 'jquery' ),
+            'version' => '4.4.1',
+            'in_footer' => true,
+            'object_name' => '',
+            'object_params' => array()
+        );
+        $bootstrap = new Script_JS( $bootstrap_data );
+        $validator = new Script_Validator();
+        $register = new Script_JS_Register();
 
-        $bootstrap->set_name( 'bootstrap-4-js' );
-        $bootstrap->set_version( '4.4.1' );
-        $bootstrap->set_src( 'bootstrap/bootstrap.min.js' );
-        $bootstrap->add_dependecy( 'jquery' );
-        $bootstrap->insert_footer( true );
-        $bootstrap->register();
-        $bootstrap->enqueue();
+        if( $validator->validate( $bootstrap ) ) {
+            $register->register( $bootstrap );
+            $register->enqueue( $bootstrap );
+            
+        }
 
     }
 
-    public function load_settings() {
-        $this->load_post_types();
+    public function create_settings() {
+        $this->create_post_types();
 
     }
 
-    public function load_post_types() {
-        add_action( 'init', array( $this, 'load_authforms_post_type' ) );
+    public function create_post_types() {
+        $this->create_auth_forms();
+
 
     }
 
-    public function load_authforms_post_type() {
-        $post_type = new AuthForms_Post_Type();
+    public function create_auth_forms() {
+        add_action( 'init', array( $this, 'create_post_type_authforms' ) );
 
-        $post_type->set_name( 'authforms' );
-        $post_type->set_menu_icon( 'dashicons-admin-page' );
-        $post_type->set_labels( array(
-            'name' => __( 'Forms', TEXT_DOMAIN ),
-            'singular_name' => __( 'Form', TEXT_DOMAIN ),
-            'all_items' => __( 'All forms', TEXT_DOMAIN )
-        ));
-        $post_type->add_support( 'title' );
-        $post_type->add_support( 'editor' );
+    }
 
-        $post_type->register();
+    public function create_post_type_authforms() {
+        $post_type_data = array(
+            'name' => 'authforms',
+            'menu_icon' => 'dashicons-admin-page',
+            'menu_position' => 20,
+            'labels' => array(
+                'name' => __( 'Forms', TEXT_DOMAIN ),
+                'singular_name' => __( 'Form', TEXT_DOMAIN ),
+                'all_items' => __( 'All forms', TEXT_DOMAIN )
+            ),
+            'description' => 'Any things...',
+            'public' => true,
+            'supports' => array(
+                'title', 'editor'
+            ),
+            'meta_boxes' => array(
+                array(
+                    'id' => 'services_meta_box',
+                    'title' => __( 'Services', TEXT_DOMAIN ),
+                    'post_type' => 'authforms',
+                    'context' => 'normal',
+                    'priority' => 'default',
+                    'meta_fields' => array(
+                        array(
+                            'tag' => 'input',
+                            'title' => __( 'Service Title', TEXT_DOMAIN ),
+                            'input' => array(
+                                'id' => 'service_title',
+                                'name' => 'service_title',
+                                'type' => 'text',
+                                'class' => array(
+                                    'large-text'
+                                ),
+                                'value' => '',
+                                'placeholder' => 'title text',
+                                'required' => true
+                            )                            
+                        ),
+                        array(
+                            'tag' => 'list',
+                            'items' => array(
+                                //array( 'text' => 'item 1', 'value' => 250 )
+                            ),
+                            'title' => __( 'Service Items', TEXT_DOMAIN )
+                        )
+                    )
+                ),
+                array(
+                    'id' => 'settings_meta_box',
+                    'title' => __( 'Settings', TEXT_DOMAIN ),
+                    'post_type' => 'authforms',
+                    'context' => 'normal',
+                    'priority' => 'default',
+                    'meta_fields' => array(
+                        array(
+                            'name' => 'expiration_time',
+                            'tag' => 'select'
+                        ),
+                        array(
+                            'name' => 'service_parcel',
+                            'tag' => 'select'
+                        ),
+                        array(
+                            'name' => 'contract_id',
+                            'tag' => 'select'
+                        ),
+                    )
+                )
+                // 'title',
+                // 'content',
+                // 'status',
+                // 'expiration_time',
+                // 'secret_key',
+                // 'service_title',
+                // 'service_items',
+                // 'service_parcel',
+                // 'contract_id',
+                // 'origin',
+                // 'document_create_by',
+                // 'document_create_at'
+            )
+        );
+        $post_type = new AuthForms_Post_Type( $post_type_data );
+
+        $register = new Post_Type_Register();
+        $register->register( $post_type );
+
+        add_action( 'add_meta_boxes', array( $post_type, 'create_meta_boxes' ) );
 
     }
 

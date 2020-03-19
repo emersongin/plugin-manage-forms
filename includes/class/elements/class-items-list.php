@@ -33,15 +33,6 @@
         public function load_script( JS_Script $script ) {
             $this->set_script( $script );
 
-            $script_data = array(
-                'name' => 'admin-items-list-js',
-                'src' => 'admin-items-list.js',
-                'version' => '1.0',
-                'object_name' => 'itemsList',
-                'action_name' => 'admin_enqueue_scripts',
-                'footer' => true
-            );
-
             $this->create_script( $script_data );
             $this->create_params();
             $this->enqueue_script();
@@ -50,12 +41,7 @@
 
         public function create_script( $script_data ) {
             if ( count( $script_data ) ) {
-                $this->js_script->set_name( $script_data['name'] );
-                $this->js_script->set_src( $script_data['src'] );
-                $this->js_script->set_version( $script_data['version'] );
-                $this->js_script->set_object_name( $script_data['object_name'] );
-                $this->js_script->set_action_name( $script_data['action_name'] );
-                $this->js_script->insert_footer( $script_data['footer'] );
+
                 
             }
 

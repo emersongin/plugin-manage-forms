@@ -1,5 +1,7 @@
 <?php
 
+    defined( 'ABSPATH' ) || exit;
+
     abstract class Element_HTML implements Interface_Element_HTML {
         private $tag = '';
         private $inner_text = '';
