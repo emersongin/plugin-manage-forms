@@ -62,33 +62,28 @@
 
             echo "<" . $tag; 
 
-            if ( count( $attributes ) ) {
-                foreach ( $attributes as $attribute => $flags ) {
-                    if( $attribute ) {
-                        echo " " . $attribute;
+                if ( count( $attributes ) ) {
+                    foreach ( $attributes as $attribute => $flags ) {
+                        if( $attribute ) {
+                            echo " " . $attribute;
+                            if( is_array( $flags ) and count( $flags ) ) {
+                                echo '="';
+                                    foreach ( $flags as $flag ) {
+                                        echo " " . $flag;
 
-                        if( is_array( $flags ) and count( $flags ) ) {
+                                    }
+                                echo ' "';
 
-                            echo '="';
-                                foreach ( $flags as $flag ) {
-                                    echo " " . $flag;
-
-                                }
-                            echo ' "';
-
-                        } else if ( is_string( $flags ) ) {
-
-                            echo '="';
-                                echo $flags;
-                            echo '"';
+                            } else if ( is_string( $flags ) ) {
+                                echo '="' . $flags . '"';
+                                
+                            }
                             
                         }
-                        
+        
                     }
-    
-                }
-            }               
-            echo " >"; 
+                }     
+            echo ">"; 
             
             if ( $text ) { echo $text; }
 
@@ -97,12 +92,9 @@
                     $element->append();
 
                 }
-
             }
             
-            echo "</";
-                echo $tag;
-            echo ">";
+            echo "</" . $tag . ">";
             
         }
 

@@ -71,7 +71,6 @@ class Plugin_Manager {
     }
 
     public function load_admin_enqueue_scripts() {
-        $this->load_admin_fonts();
         $this->load_admin_css();
 
     }
@@ -79,26 +78,6 @@ class Plugin_Manager {
     public function load_wp_enqueue_scripts() {
         $this->load_plugin_css();
         $this->load_plugin_scripts();
-
-    }
-
-    private function load_admin_fonts() {
-        $font_data = array(
-            'name' => 'fonts-awesome',
-            'src' => 'fontawesome-free-5.12.0-web/css/all.min.css',
-            'dependencies' => array(),
-            'version' => '5.12.0',
-            'media' => 'all'
-        );
-        $font_awesome = new Style_Sheet( $font_data );
-        $validator = new Script_Validator();
-        $register = new Style_Sheet_Register();
-
-        if( $validator->validate( $font_awesome ) ) {
-            $register->register( $font_awesome );
-            $register->enqueue( $font_awesome );
-
-        }
 
     }
 
@@ -110,15 +89,11 @@ class Plugin_Manager {
             'version' => '1.0',
             'media' => 'all'
         );
-        $style = new Style_Sheet( $style_data );
-        $validator = new Script_Validator();
-        $register = new Style_Sheet_Register();
-
-        if( $validator->validate( $style ) ) {
-            $register->register( $style );
-            $register->enqueue( $style );
-
-        }
+        $style = new Style_Sheet( 
+            $style_data, 
+            new Style_Sheet_Register(), 
+            new Script_Validator() 
+        );
     }
 
     public function load_plugin_css() {
@@ -137,22 +112,16 @@ class Plugin_Manager {
             'media' => 'all'
         );
 
-        $bootstrap = new Style_Sheet( $bootstrap_data );
-        $style = new Style_Sheet( $style_data );
-        $validator = new Script_Validator();
-        $register = new Style_Sheet_Register();
-
-        if( $validator->validate( $bootstrap ) ) {
-            $register->register( $bootstrap );
-            $register->enqueue( $bootstrap );
-
-        }
-
-        if( $validator->validate( $style ) ) {
-            $register->register( $style );
-            $register->enqueue( $style );
-
-        }
+        $bootstrap = new Style_Sheet( 
+            $bootstrap_data, 
+                new Style_Sheet_Register(), 
+                new Script_Validator() 
+            );
+        $style = new Style_Sheet( 
+            $style_data, 
+            new Style_Sheet_Register(), 
+            new Script_Validator() 
+        );
 
     }
 
@@ -166,15 +135,11 @@ class Plugin_Manager {
             'object_name' => '',
             'object_params' => array()
         );
-        $bootstrap = new Script_JS( $bootstrap_data );
-        $validator = new Script_Validator();
-        $register = new Script_JS_Register();
-
-        if( $validator->validate( $bootstrap ) ) {
-            $register->register( $bootstrap );
-            $register->enqueue( $bootstrap );
-            
-        }
+        $bootstrap = new Script_JS( 
+            $bootstrap_data,
+            new Script_JS_Register(),
+            new Script_Validator()
+        );
 
     }
 
@@ -219,13 +184,18 @@ class Plugin_Manager {
                     'meta_fields' => array(
                         array(
                             'tag' => 'container',
+                            'attributes' => array(
+                                'class' => array(
+                                    'wrap'
+                                ),
+                            ),
                             'inner_elements' => array(
                                 array(
                                     'tag' => 'input',
                                     'label' => __( 'Service Title', TEXT_DOMAIN ),
                                     'attributes' => array(
-                                        'id' => 'service_title',
-                                        'name' => 'service_title',
+                                        'id' => 'service-title',
+                                        'name' => 'service-title',
                                         'type' => 'text',
                                         'class' => array(
                                             'large-text'
@@ -239,6 +209,52 @@ class Plugin_Manager {
                                 )
                             )
                         ),
+                        array(
+                            'tag' => 'container',
+                            'text' => 'Items List',
+                            'attributes' => array(
+                                'class' => array(
+                                    'wrap'
+                                ),
+                            ),
+                            'inner_elements' => array(
+                                array(
+                                    'tag' => 'itemslist',
+                                    'attributes' => array(
+                                        'id' => 'list-items'
+                                    ),
+                                    'script' => new Script_JS( 
+                                        array(
+                                            'name' => 'admin-items-list-js',
+                                            'src' => 'elements-items-list.js',
+                                            'dependencies' => array(),
+                                            'version' => '1.0',
+                                            'in_footer' => true,
+                                            'object_name' => 'itemsList',
+                                            'object_params' => array(
+                                                array(
+                                                    'text' => 'item 1',
+                                                    'value' => 200
+                                                ),
+                                                array(
+                                                    'text' => 'item 2',
+                                                    'value' => 150
+                                                ),
+                                                array(
+                                                    'text' => 'item 3',
+                                                    'value' => 10.5
+                                                ),
+                                            )
+                                        ),
+                                        new Script_JS_Register(),
+                                        new Script_Validator()
+                                    ),
+                                    'inner_elements' => array(
+                                        
+                                    )
+                                )
+                            )
+                        )
                     )
                 )
                 // array(

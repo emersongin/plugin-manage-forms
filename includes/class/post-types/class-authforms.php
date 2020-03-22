@@ -29,7 +29,7 @@
             $field = null;
 
             foreach ( $meta_box['args'] as $key => $meta_field ) {
-                if ( $key == 'tag' ) {
+                if ( $meta_field['tag'] ) {
                     $field = $this->create_element( $meta_field );
                     $field->append();
 
@@ -50,8 +50,8 @@
                     $element = $this->elements_factory->create_input( $meta_field ); 
 
                     break;
-                case 'items_list':
-                    $element = $this->elements_factory->create_input( $meta_field ); 
+                case 'itemslist':
+                    $element = $this->elements_factory->create_items_list( $meta_field ); 
 
                     break;
                 default:

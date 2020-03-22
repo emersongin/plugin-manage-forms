@@ -13,7 +13,7 @@
         }
 
         public function create_items_list ( Array $meta_box ) {
-            return new Items_List_Element( $meta_box );
+            return new Items_List_Element( $meta_box, $meta_box['script'] );
 
         }
 

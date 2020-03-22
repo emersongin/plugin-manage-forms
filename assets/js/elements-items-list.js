@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let divItemsList = document.getElementById( 'div-list-items' );
-    let addButton = document.getElementById( 'add-item-list' );
+    let divItemsList = document.getElementById( 'list-items' );
+    let addButton = document.getElementById( 'list-items-add' );
+
     let item = {
         init: function() {
             this.p = this.createElement("p");
@@ -77,12 +78,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     item.init();
-console.log(itemsList);
-    if ( itemsList ) {
+
+    if ( itemsList.length ) {
         itemsList.forEach(element => {
             divItemsList.appendChild( item.new( element.text, element.value ) );
 
         });
+
+    } else {
+        divItemsList.appendChild( item.new( '', 0 ) );
 
     }
 
