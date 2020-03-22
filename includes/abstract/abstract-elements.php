@@ -2,16 +2,30 @@
 
     defined( 'ABSPATH' ) || exit;
 
-    abstract class Element_HTML implements Interface_Element_HTML {
+    abstract class Elements implements Interface_Elements {
         private $tag = '';
         private $inner_text = '';
-        private $inner_elements = array();
         private $attributes = array();
-        protected $js_script = null;
-        protected $css_style_sheet = null;
+        private $inner_elements = array();
 
-        public function __construct( $tag ) {
-            $this->set_tag( $tag );
+        protected $script = null;
+        protected $style_sheet = null;
+
+        public function __construct( Array $element ) {
+            if ( isset( $element['tag'] ) ) {
+                $this->tag = $element['tag'];
+
+            }
+
+            if ( isset( $element['text'] ) ) {
+                $this->inner_text = $element['text'];
+
+            }
+
+            if ( isset( $element['attributes'] ) ) {
+                $this->attributes = $element['attributes'];
+
+            }
 
         }
 
@@ -20,28 +34,8 @@
 
         }
 
-        public function set_tag( $tag ) {
-            $this->tag = $tag;
-
-        }
-
-        public function get_inner_text() {
+        public function get_text() {
             return $this->inner_text;
-
-        }
-
-        public function set_inner_text( $inner_text ) {
-            $this->inner_text = $inner_text;
-
-        }
-
-        public function get_inner_elements() {
-            return $this->inner_elements;
-
-        }
-
-        public function add_inner_element( $element ) {
-            $this->inner_elements[] = $element;
 
         }
 
@@ -50,57 +44,44 @@
 
         }
 
-        public function set_attributes( $attributes ) {
-            $this->attributes = $attributes;
+        public function get_elements() {
+            return $this->inner_elements;
 
         }
 
-        public function add_attribute( $key, $attribute ) {
-            $this->attributes[ $key ] = $attribute;
+        public function add_element( $element ) {
+            $this->inner_elements[] = $element;
 
         }
 
-        public function get_script() {
-            return $this->js_script;
+        public function append() {
+            $tag = $this->get_tag();
+            $text = $this->get_text();
+            $attributes = $this->get_attributes();
+            $elements = $this->get_elements();
 
-        }
+            echo "<" . $tag; 
 
-        public function set_script( $js_script ) {
-            $this->js_script = $js_script;
+            if ( count( $attributes ) ) {
+                foreach ( $attributes as $attribute => $flags ) {
+                    if( $attribute ) {
+                        echo " " . $attribute;
 
-        }
+                        if( is_array( $flags ) and count( $flags ) ) {
 
-        public function get_style_sheet() {
-            return $this->css_style_sheet;
-
-        }
-
-        public function set_style_sheet( $css_style_sheet ) {
-            $this->css_style_sheet = $css_style_sheet;
-
-        }
-
-        public function load_style_sheet( Style_Sheet $style ) {}
-        public function load_script( JS_Script $script ) {}
-
-        public function app_end() {
-            echo "<" . $this->get_tag(); 
-
-            if ( count( $this->get_attributes() ) ) {
-                foreach ( $this->get_attributes() as $tag_attr => $attributes ) {
-                    if( $tag_attr ) {
-                        echo " " . $tag_attr;
-
-                        if( is_array( $attributes ) and count( $attributes ) ) {
                             echo '="';
-                                foreach ( $attributes as $attribute ) {
-                                    echo " " . $attribute;
+                                foreach ( $flags as $flag ) {
+                                    echo " " . $flag;
+
                                 }
                             echo ' "';
-                        } else if ( is_string( $attributes ) ) {
+
+                        } else if ( is_string( $flags ) ) {
+
                             echo '="';
-                                echo $attributes;
+                                echo $flags;
                             echo '"';
+                            
                         }
                         
                     }
@@ -108,23 +89,20 @@
                 }
             }               
             echo " >"; 
+            
+            if ( $text ) { echo $text; }
 
-            if ( count( $this->get_inner_elements() ) ) {
-                foreach ( $this->get_inner_elements() as $element ) {
-                    $element->app_end();
+            if ( count( $elements ) ) {
+                foreach ( $elements as $element ) {
+                    $element->append();
 
                 }
 
             }
             
-            if ( $this->get_inner_text() ) {
-                echo $this->get_inner_text();
-
-            }
-            
-            echo '</';
-                echo $this->get_tag();
-            echo '>';
+            echo "</";
+                echo $tag;
+            echo ">";
             
         }
 

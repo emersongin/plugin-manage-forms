@@ -2,7 +2,7 @@
 
     defined( 'ABSPATH' ) || exit;
 
-    class Style_Sheet_Register extends Script_Register implements Interface_Style_Register {
+    class Style_Sheet_Register implements Interface_Style_Register {
 
         public function enqueue(  Interface_Script $script  ) {
             wp_enqueue_style( $script->get_handle_name() );    

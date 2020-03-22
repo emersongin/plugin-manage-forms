@@ -2,7 +2,7 @@
 
     defined( 'ABSPATH' ) || exit;
 
-    class Post_Type_Register {
+    class Post_Type_Register implements Interface_Post_Type_Register {
 
         public function register( Interface_Post_Type $post_type ) {
             register_post_type( 

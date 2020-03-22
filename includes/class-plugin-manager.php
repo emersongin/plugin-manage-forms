@@ -27,7 +27,6 @@ class Plugin_Manager {
 
     private function create_class() {
         //interfaces
-        // require_once MG_FORMS_DIR . '/includes/interface/interface-elements.php';
         require_once MG_FORMS_DIR . '/includes/interface/interface-script.php';
         require_once MG_FORMS_DIR . '/includes/interface/interface-script-validator.php';
         require_once MG_FORMS_DIR . '/includes/interface/interface-script-js-register.php';
@@ -35,12 +34,15 @@ class Plugin_Manager {
         require_once MG_FORMS_DIR . '/includes/interface/interface-style-sheet-register.php';
         require_once MG_FORMS_DIR . '/includes/interface/interface-style-sheet.php';
 
+        require_once MG_FORMS_DIR . '/includes/interface/interface-post-type-register.php';
         require_once MG_FORMS_DIR . '/includes/interface/interface-post-type.php';
 
+        require_once MG_FORMS_DIR . '/includes/interface/interface-elements-factory.php';
+        require_once MG_FORMS_DIR . '/includes/interface/interface-elements.php';
+
         //abstracts
-        // require_once MG_FORMS_DIR . '/includes/abstract/abstract-elements.php';
+        require_once MG_FORMS_DIR . '/includes/abstract/abstract-elements.php';
         require_once MG_FORMS_DIR . '/includes/abstract/abstract-custom-post-type.php';
-        require_once MG_FORMS_DIR . '/includes/abstract/abstract-script-register.php';
         require_once MG_FORMS_DIR . '/includes/abstract/abstract-script.php';
         
         //class
@@ -54,9 +56,11 @@ class Plugin_Manager {
         require_once MG_FORMS_DIR . '/includes/class/post-types/class-authforms.php';
         // require_once MG_FORMS_DIR . '/includes/class/post-types/class-terms.php';
 
-        // require_once MG_FORMS_DIR . '/includes/class/elements/class-element.php';
-        // require_once MG_FORMS_DIR . '/includes/class/elements/class-input.php';
-        // require_once MG_FORMS_DIR . '/includes/class/elements/class-items-list.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-elements-factory.php';
+
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-container.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-input.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-items-list.php';
 
     }
 
@@ -214,50 +218,81 @@ class Plugin_Manager {
                     'priority' => 'default',
                     'meta_fields' => array(
                         array(
-                            'tag' => 'input',
-                            'title' => __( 'Service Title', TEXT_DOMAIN ),
-                            'input' => array(
-                                'id' => 'service_title',
-                                'name' => 'service_title',
-                                'type' => 'text',
-                                'class' => array(
-                                    'large-text'
-                                ),
-                                'value' => '',
-                                'placeholder' => 'title text',
-                                'required' => true
-                            )                            
-                        ),
-                        array(
-                            'tag' => 'list',
-                            'items' => array(
-                                //array( 'text' => 'item 1', 'value' => 250 )
-                            ),
-                            'title' => __( 'Service Items', TEXT_DOMAIN )
-                        )
-                    )
-                ),
-                array(
-                    'id' => 'settings_meta_box',
-                    'title' => __( 'Settings', TEXT_DOMAIN ),
-                    'post_type' => 'authforms',
-                    'context' => 'normal',
-                    'priority' => 'default',
-                    'meta_fields' => array(
-                        array(
-                            'name' => 'expiration_time',
-                            'tag' => 'select'
-                        ),
-                        array(
-                            'name' => 'service_parcel',
-                            'tag' => 'select'
-                        ),
-                        array(
-                            'name' => 'contract_id',
-                            'tag' => 'select'
+                            'tag' => 'container',
+                            'inner_elements' => array(
+                                array(
+                                    'tag' => 'input',
+                                    'label' => __( 'Service Title', TEXT_DOMAIN ),
+                                    'attributes' => array(
+                                        'id' => 'service_title',
+                                        'name' => 'service_title',
+                                        'type' => 'text',
+                                        'class' => array(
+                                            'large-text'
+                                        ),
+                                        'placeholder' => 'title text',
+                                        'required' => true
+                                    ),
+                                    'inner_elements' => array(
+                                        
+                                    )
+                                )
+                            )
                         ),
                     )
                 )
+                // array(
+                //     'id' => 'services_meta_box',
+                //     'title' => __( 'Services', TEXT_DOMAIN ),
+                //     'post_type' => 'authforms',
+                //     'context' => 'normal',
+                //     'priority' => 'default',
+                //     'meta_fields' => array(
+                //         array(
+                //             'tag' => 'input',
+                //             'title' => __( 'Service Title', TEXT_DOMAIN ),
+                //             'input' => array(
+                //                 'id' => 'service_title',
+                //                 'name' => 'service_title',
+                //                 'type' => 'text',
+                //                 'class' => array(
+                //                     'large-text'
+                //                 ),
+                //                 'value' => '',
+                //                 'placeholder' => 'title text',
+                //                 'required' => true
+                //             )                            
+                //         ),
+                //         array(
+                //             'tag' => 'list',
+                //             'items' => array(
+                //                 //array( 'text' => 'item 1', 'value' => 250 )
+                //             ),
+                //             'title' => __( 'Service Items', TEXT_DOMAIN )
+                //         )
+                //     )
+                // ),
+                // array(
+                //     'id' => 'settings_meta_box',
+                //     'title' => __( 'Settings', TEXT_DOMAIN ),
+                //     'post_type' => 'authforms',
+                //     'context' => 'normal',
+                //     'priority' => 'default',
+                //     'meta_fields' => array(
+                //         array(
+                //             'name' => 'expiration_time',
+                //             'tag' => 'select'
+                //         ),
+                //         array(
+                //             'name' => 'service_parcel',
+                //             'tag' => 'select'
+                //         ),
+                //         array(
+                //             'name' => 'contract_id',
+                //             'tag' => 'select'
+                //         ),
+                //     )
+                // )
                 // 'title',
                 // 'content',
                 // 'status',
@@ -272,7 +307,7 @@ class Plugin_Manager {
                 // 'document_create_at'
             )
         );
-        $post_type = new AuthForms_Post_Type( $post_type_data );
+        $post_type = new AuthForms_Post_Type( $post_type_data, new Elements_Factory() );
 
         $register = new Post_Type_Register();
         $register->register( $post_type );

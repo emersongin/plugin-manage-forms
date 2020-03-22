@@ -4,8 +4,8 @@
 
     class AuthForms_Post_Type extends Custom_Post_Type {
 
-        public function __construct( Array $post_type_data ) {
-            parent::__construct( $post_type_data );
+        public function __construct( Array $post_type_data, Interface_Elements_Factory $elements_factory ) {
+            parent::__construct( $post_type_data, $elements_factory );
 
         }
 
@@ -26,43 +26,49 @@
         }
 
         public function render_meta_boxes( $post, $meta_box ) {
-            foreach ( $meta_box['args'] as $key => $value) {
+            $field = null;
 
-                switch ( $value['tag'] ) {
-                    case 'input':
-                        $input = new Input( $value['input'] );
+            foreach ( $meta_box['args'] as $key => $meta_field ) {
+                if ( $key == 'tag' ) {
+                    $field = $this->create_element( $meta_field );
+                    $field->append();
 
-                        $input->set_title( $value['title'] );
-                        $input->create_elements( 'Element' );
-                        $input->app_end();
-
-                        break;
-                    case 'list':
-                        $list = new Items_List( $value['items'] );
-
-                        $script_data = array(
-                            'name' => 'admin-items-list-js',
-                            'src' => 'admin-items-list.js',
-                            'dependencies' => array(),
-                            'version' => '1.0',
-                            'object_name' => 'itemsList',
-                            'action_name' => 'admin_enqueue_scripts',
-                            'object_params' => array(),
-                            'in_footer' => true
-                        );
-
-                        $list->set_title( $value['title'] );
-                        $list->load_script( new JS_Script( $script_data ) );
-                        $list->create_elements( 'Element' );
-                        $list->app_end();
-
-                        break;
-                    default:
-                        echo 'others';
-                        break;
                 }
 
             }   
+        }
+
+        private function create_element( $meta_field ) {
+            $element = null;
+
+            switch ( $meta_field['tag'] ) {
+                case 'container':
+                    $element = $this->elements_factory->create_container( $meta_field ); 
+
+                    break;
+                case 'input':
+                    $element = $this->elements_factory->create_input( $meta_field ); 
+
+                    break;
+                case 'items_list':
+                    $element = $this->elements_factory->create_input( $meta_field ); 
+
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+            if ( count( $meta_field['inner_elements'] ) ) {
+                foreach ( $meta_field['inner_elements'] as $key => $inner_field ) {
+                    $element->add_element( $this->create_element( $inner_field ) );
+    
+                }
+
+            }
+
+            return $element;
+
         }
 
     }

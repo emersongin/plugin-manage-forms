@@ -2,7 +2,7 @@
 
     defined( 'ABSPATH' ) || exit;
 
-    class Script_JS_Register extends Script_Register implements Interface_Script_JS_Register {
+    class Script_JS_Register implements Interface_Script_JS_Register {
 
         public function enqueue(  Interface_Script $script  ) {
             wp_enqueue_script( $script->get_handle_name() );    

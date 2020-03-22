@@ -11,8 +11,9 @@
         private $menu_icon = 'none';
         private $supports = array();
         private $meta_boxes = array();
+        protected $elements_factory = null;
 
-        public function __construct( Array $post_type_data ) {
+        public function __construct( Array $post_type_data, Interface_Elements_Factory $elements_factory ) {
             $this->name = substr( sanitize_key( $post_type_data['name'] ), 0, 20 );
             $this->labels = $post_type_data['labels'];
             $this->description = $post_type_data['description'];
@@ -21,6 +22,7 @@
             $this->menu_icon = $post_type_data['menu_icon'];
             $this->supports = $post_type_data['supports'];
             $this->meta_boxes = $post_type_data['meta_boxes'];
+            $this->elements_factory = $elements_factory;
 
         }
 

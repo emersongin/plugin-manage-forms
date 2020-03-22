@@ -1,32 +1,17 @@
 <?php
 
-    class Items_List extends Element_HTML {
-        private $title = '';
+    class Items_List_Element extends Elements {
         private $items = array();
 
-        public function __construct( $items = array() ) {
-            $this->set_tag( 'div' );
-            $this->set_items( $items );
+        public function __construct( Array $element ) {
+            $element['tag'] = 'div';
 
-        }
+            if ( isset( $element['items'] ) ) {
+                $this->items = $element['items'];
 
-        public function get_title() {
-            return $this->title;
-
-        }
-
-        public function set_title( $title ) {
-            $this->title = $title;
-
-        }
-
-        public function get_items() {
-            return $this->items;
-
-        }
-
-        public function set_items( $items ) {
-            $this->items = $items;
+            }
+            
+            parent::__construct( $element );
 
         }
 
@@ -36,39 +21,6 @@
             $this->create_script( $script_data );
             $this->create_params();
             $this->enqueue_script();
-
-        }
-
-        public function create_script( $script_data ) {
-            if ( count( $script_data ) ) {
-
-                
-            }
-
-        }
-
-        public function create_params() {
-            $items = $this->get_items();
-            
-            if ( is_array( $items ) ) {
-                if ( count( $items ) == false ) {
-                    $items[] = array( 'text' => '', 'value' => 0 );
-
-                }
-
-                foreach ( $items as $item ) {
-                    $this->js_script->add_param( $item );
-
-                }
-                
-            }
-
-        }
-
-        public function enqueue_script() {
-            $this->js_script->register();
-            $this->js_script->include_params();
-            $this->js_script->enqueue();
 
         }
 
