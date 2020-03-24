@@ -1,6 +1,10 @@
+
 document.addEventListener('DOMContentLoaded', function() {
-    let divItemsList = document.getElementById( 'list-items' );
-    let addButton = document.getElementById( 'list-items-add' );
+    
+    const items = Object.assign({}, itemsList);
+
+    let divItemsList = document.getElementById( items.id );
+    let addButton = document.getElementById( items.id + '-add' );
 
     let item = {
         init: function() {
@@ -79,8 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     item.init();
 
-    if ( itemsList.length ) {
-        itemsList.forEach(element => {
+    if ( items.length ) {
+        items.forEach(element => {
             divItemsList.appendChild( item.new( element.text, element.value ) );
 
         });

@@ -17,5 +17,10 @@
 
         }
 
+        public function create_select ( Array $meta_box ) {
+            return new Select_Element( $meta_box, $meta_box['script'] );
+
+        }
+
     }
     

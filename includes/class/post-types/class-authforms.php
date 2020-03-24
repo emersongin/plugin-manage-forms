@@ -54,12 +54,16 @@
                     $element = $this->elements_factory->create_items_list( $meta_field ); 
 
                     break;
+                case 'select':
+                    $element = $this->elements_factory->create_select( $meta_field ); 
+
+                    break;
                 default:
                     # code...
                     break;
             }
 
-            if ( count( $meta_field['inner_elements'] ) ) {
+            if ( isset( $meta_field['inner_elements'] ) and count( $meta_field['inner_elements'] ) ) {
                 foreach ( $meta_field['inner_elements'] as $key => $inner_field ) {
                     $element->add_element( $this->create_element( $inner_field ) );
     

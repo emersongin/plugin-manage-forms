@@ -61,6 +61,7 @@ class Plugin_Manager {
         require_once MG_FORMS_DIR . '/includes/class/elements/class-element-container.php';
         require_once MG_FORMS_DIR . '/includes/class/elements/class-element-input.php';
         require_once MG_FORMS_DIR . '/includes/class/elements/class-element-items-list.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-select.php';
 
     }
 
@@ -198,13 +199,11 @@ class Plugin_Manager {
                                         'name' => 'service-title',
                                         'type' => 'text',
                                         'class' => array(
-                                            'large-text'
+                                            'large-text',
+                                            'wrap'
                                         ),
                                         'placeholder' => 'title text',
                                         'required' => true
-                                    ),
-                                    'inner_elements' => array(
-                                        
                                     )
                                 )
                             )
@@ -232,83 +231,137 @@ class Plugin_Manager {
                                             'in_footer' => true,
                                             'object_name' => 'itemsList',
                                             'object_params' => array(
-                                                array(
-                                                    'text' => 'item 1',
-                                                    'value' => 200
-                                                ),
-                                                array(
-                                                    'text' => 'item 2',
-                                                    'value' => 150
-                                                ),
-                                                array(
-                                                    'text' => 'item 3',
-                                                    'value' => 10.5
-                                                ),
+                                                'id' => 'list-items',
+                                                'items' => array(
+                                                    array(
+                                                        'text' => 'item 1',
+                                                        'value' => 200
+                                                    ),
+                                                    array(
+                                                        'text' => 'item 2',
+                                                        'value' => 150
+                                                    ),
+                                                    array(
+                                                        'text' => 'item 3',
+                                                        'value' => 10.5
+                                                    )
+                                                )
                                             )
                                         ),
                                         new Script_JS_Register(),
                                         new Script_Validator()
+                                    )
+                                )
+                            )
+                        ),
+                        array(
+                            'tag' => 'container',
+                            'text' => 'Items List',
+                            'attributes' => array(
+                                'class' => array(
+                                    'wrap'
+                                ),
+                            ),
+                            'inner_elements' => array(
+                                array(
+                                    'tag' => 'itemslist',
+                                    'attributes' => array(
+                                        'id' => 'list-items-2'
                                     ),
-                                    'inner_elements' => array(
-                                        
+                                    'script' => new Script_JS( 
+                                        array(
+                                            'name' => 'admin-items-list-2-js',
+                                            'src' => 'elements-items-list.js',
+                                            'dependencies' => array(),
+                                            'version' => '1.0',
+                                            'in_footer' => true,
+                                            'object_name' => 'itemsList',
+                                            'object_params' => array(
+                                                'id' => 'list-items-2',
+                                                'items' => array(
+                                                    array(
+                                                        'text' => 'item 1',
+                                                        'value' => 200
+                                                    ),
+                                                    array(
+                                                        'text' => 'item 2',
+                                                        'value' => 150
+                                                    ),
+                                                    array(
+                                                        'text' => 'item 3',
+                                                        'value' => 10.5
+                                                    )
+                                                )
+                                            )
+                                        ),
+                                        new Script_JS_Register(),
+                                        new Script_Validator()
                                     )
                                 )
                             )
                         )
                     )
+                ),
+                array(
+                    'id' => 'settings_meta_box',
+                    'title' => __( 'Settings', TEXT_DOMAIN ),
+                    'post_type' => 'authforms',
+                    'context' => 'normal',
+                    'priority' => 'default',
+                    'meta_fields' => array(
+                        array(
+                            'tag' => 'container',
+                            'text' => 'Expiration Time',
+                            'attributes' => array(
+                                'class' => array(
+                                    'wrap'
+                                ),
+                            ),
+                            'inner_elements' => array(  
+                                array(
+                                    'tag' => 'select',
+                                    'attributes' => array(
+                                        'id' => 'expiration_time',
+                                        'class' => array(
+                                            'wrap'
+                                        )
+                                    ),
+                                    'script' => new Script_JS( 
+                                        array(
+                                            'name' => 'admin-select-js',
+                                            'src' => 'elements-select.js',
+                                            'dependencies' => array(),
+                                            'version' => '1.0',
+                                            'in_footer' => true,
+                                            'object_name' => 'selectList',
+                                            'object_params' => array(
+                                                array(
+                                                    'text' => 'item 1',
+                                                    'value' => 200,
+                                                    'select' => true
+                                                )
+                                            )
+                                        ),
+                                        new Script_JS_Register(),
+                                        new Script_Validator()
+                                    )
+                                )
+                            )
+                        )
+                        // array(
+                        //     'name' => 'expiration_time',
+                        //     'tag' => 'select'
+                        // ),
+                        // array(
+                        //     'name' => 'service_parcel',
+                        //     'tag' => 'select'
+                        // ),
+                        // array(
+                        //     'name' => 'contract_id',
+                        //     'tag' => 'select'
+                        // ),
+                    )
                 )
-                // array(
-                //     'id' => 'services_meta_box',
-                //     'title' => __( 'Services', TEXT_DOMAIN ),
-                //     'post_type' => 'authforms',
-                //     'context' => 'normal',
-                //     'priority' => 'default',
-                //     'meta_fields' => array(
-                //         array(
-                //             'tag' => 'input',
-                //             'title' => __( 'Service Title', TEXT_DOMAIN ),
-                //             'input' => array(
-                //                 'id' => 'service_title',
-                //                 'name' => 'service_title',
-                //                 'type' => 'text',
-                //                 'class' => array(
-                //                     'large-text'
-                //                 ),
-                //                 'value' => '',
-                //                 'placeholder' => 'title text',
-                //                 'required' => true
-                //             )                            
-                //         ),
-                //         array(
-                //             'tag' => 'list',
-                //             'items' => array(
-                //                 //array( 'text' => 'item 1', 'value' => 250 )
-                //             ),
-                //             'title' => __( 'Service Items', TEXT_DOMAIN )
-                //         )
-                //     )
-                // ),
-                // array(
-                //     'id' => 'settings_meta_box',
-                //     'title' => __( 'Settings', TEXT_DOMAIN ),
-                //     'post_type' => 'authforms',
-                //     'context' => 'normal',
-                //     'priority' => 'default',
-                //     'meta_fields' => array(
-                //         array(
-                //             'name' => 'expiration_time',
-                //             'tag' => 'select'
-                //         ),
-                //         array(
-                //             'name' => 'service_parcel',
-                //             'tag' => 'select'
-                //         ),
-                //         array(
-                //             'name' => 'contract_id',
-                //             'tag' => 'select'
-                //         ),
-                //     )
-                // )
                 // 'title',
                 // 'content',
                 // 'status',
