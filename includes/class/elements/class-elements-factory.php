@@ -1,9 +1,21 @@
 <?php
 
+    defined( 'ABSPATH' ) || exit;
+
     class Elements_Factory implements Interface_Elements_Factory {
 
-        public function create_container ( Array $meta_box ) {
-            return new Container_Element( $meta_box );
+        public function create_div ( Array $meta_box ) {
+            return new Div_Element( $meta_box );
+
+        }
+
+        public function create_p ( Array $meta_box ) {
+            return new P_Element( $meta_box );
+
+        }
+
+        public function create_label ( Array $meta_box ) {
+            return new Label_Element( $meta_box );
 
         }
 
@@ -12,13 +24,23 @@
 
         }
 
-        public function create_items_list ( Array $meta_box ) {
-            return new Items_List_Element( $meta_box, $meta_box['script'] );
+        public function create_button ( Array $meta_box ) {
+            return new Button_Element( $meta_box );
+
+        }
+
+        public function create_span ( Array $meta_box ) {
+            return new Span_Element( $meta_box );
 
         }
 
         public function create_select ( Array $meta_box ) {
-            return new Select_Element( $meta_box, $meta_box['script'] );
+            return new Select_Element( $meta_box );
+
+        }
+
+        public function create_option ( Array $meta_box ) {
+            return new Option_Element( $meta_box );
 
         }
 

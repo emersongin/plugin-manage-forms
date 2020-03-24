@@ -42,20 +42,36 @@
             $element = null;
 
             switch ( $meta_field['tag'] ) {
-                case 'container':
-                    $element = $this->elements_factory->create_container( $meta_field ); 
+                case 'div':
+                    $element = $this->elements_factory->create_div( $meta_field ); 
+
+                    break;
+                case 'p':
+                    $element = $this->elements_factory->create_p( $meta_field ); 
+
+                    break;
+                case 'label':
+                    $element = $this->elements_factory->create_label( $meta_field ); 
 
                     break;
                 case 'input':
                     $element = $this->elements_factory->create_input( $meta_field ); 
 
                     break;
-                case 'itemslist':
-                    $element = $this->elements_factory->create_items_list( $meta_field ); 
+                case 'button':
+                    $element = $this->elements_factory->create_button( $meta_field ); 
+
+                    break;
+                case 'span':
+                    $element = $this->elements_factory->create_span( $meta_field ); 
 
                     break;
                 case 'select':
                     $element = $this->elements_factory->create_select( $meta_field ); 
+
+                    break;
+                case 'option':
+                    $element = $this->elements_factory->create_option( $meta_field ); 
 
                     break;
                 default:

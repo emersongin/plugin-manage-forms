@@ -58,10 +58,14 @@ class Plugin_Manager {
 
         require_once MG_FORMS_DIR . '/includes/class/elements/class-elements-factory.php';
 
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-container.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-div.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-p.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-label.php';
         require_once MG_FORMS_DIR . '/includes/class/elements/class-element-input.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-items-list.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-button.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-span.php';
         require_once MG_FORMS_DIR . '/includes/class/elements/class-element-select.php';
+        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-option.php';
 
     }
 
@@ -181,10 +185,10 @@ class Plugin_Manager {
                     'title' => __( 'Services', TEXT_DOMAIN ),
                     'post_type' => 'authforms',
                     'context' => 'normal',
-                    'priority' => 'default',
+                    'priority' => 'low',
                     'meta_fields' => array(
                         array(
-                            'tag' => 'container',
+                            'tag' => 'div',
                             'attributes' => array(
                                 'class' => array(
                                     'wrap'
@@ -192,8 +196,17 @@ class Plugin_Manager {
                             ),
                             'inner_elements' => array(
                                 array(
+                                    'tag' => 'label',
+                                    'text' => array(
+                                        'value' => __( 'Service Title', TEXT_DOMAIN ),
+                                        'priority' => 'before'
+                                    ),
+                                    'attributes' => array(
+                                        'for' => 'service-title'
+                                    )
+                                ),
+                                array(
                                     'tag' => 'input',
-                                    'label' => __( 'Service Title', TEXT_DOMAIN ),
                                     'attributes' => array(
                                         'id' => 'service-title',
                                         'name' => 'service-title',
@@ -209,8 +222,11 @@ class Plugin_Manager {
                             )
                         ),
                         array(
-                            'tag' => 'container',
-                            'text' => 'Items List',
+                            'tag' => 'div',
+                            'text' => array(
+                                'value' => 'Items List',
+                                'priority' => 'before'
+                            ),
                             'attributes' => array(
                                 'class' => array(
                                     'wrap'
@@ -218,7 +234,7 @@ class Plugin_Manager {
                             ),
                             'inner_elements' => array(
                                 array(
-                                    'tag' => 'itemslist',
+                                    'tag' => 'div',
                                     'attributes' => array(
                                         'id' => 'list-items'
                                     ),
@@ -251,51 +267,31 @@ class Plugin_Manager {
                                         new Script_JS_Register(),
                                         new Script_Validator()
                                     )
-                                )
-                            )
-                        ),
-                        array(
-                            'tag' => 'container',
-                            'text' => 'Items List',
-                            'attributes' => array(
-                                'class' => array(
-                                    'wrap'
                                 ),
-                            ),
-                            'inner_elements' => array(
                                 array(
-                                    'tag' => 'itemslist',
-                                    'attributes' => array(
-                                        'id' => 'list-items-2'
+                                    'tag' => 'button',
+                                    'text' => array(
+                                        'value' => 'Add item',
+                                        'priority' => 'after'
                                     ),
-                                    'script' => new Script_JS( 
+                                    'attributes' => array(
+                                        'id' => 'list-items-add',
+                                        'type' => 'button',
+                                        'class' => array(
+                                            'button-primary'
+                                        )
+                                    ),
+                                    'inner_elements' => array(
                                         array(
-                                            'name' => 'admin-items-list-2-js',
-                                            'src' => 'elements-items-list.js',
-                                            'dependencies' => array(),
-                                            'version' => '1.0',
-                                            'in_footer' => true,
-                                            'object_name' => 'itemsList',
-                                            'object_params' => array(
-                                                'id' => 'list-items-2',
-                                                'items' => array(
-                                                    array(
-                                                        'text' => 'item 1',
-                                                        'value' => 200
-                                                    ),
-                                                    array(
-                                                        'text' => 'item 2',
-                                                        'value' => 150
-                                                    ),
-                                                    array(
-                                                        'text' => 'item 3',
-                                                        'value' => 10.5
-                                                    )
+                                            'tag' => 'span',
+                                            'attributes' => array(
+                                                'style' => 'margin-top: 6px;',
+                                                'class' => array(
+                                                    'dashicons',
+                                                    'dashicons-plus'
                                                 )
                                             )
-                                        ),
-                                        new Script_JS_Register(),
-                                        new Script_Validator()
+                                        )
                                     )
                                 )
                             )
@@ -306,12 +302,15 @@ class Plugin_Manager {
                     'id' => 'settings_meta_box',
                     'title' => __( 'Settings', TEXT_DOMAIN ),
                     'post_type' => 'authforms',
-                    'context' => 'normal',
-                    'priority' => 'default',
+                    'context' => 'side',
+                    'priority' => 'low',
                     'meta_fields' => array(
                         array(
-                            'tag' => 'container',
-                            'text' => 'Expiration Time',
+                            'tag' => 'div',
+                            'text' => array(
+                                'value' => 'Expiration Time',
+                                'priority' => 'before'
+                            ),
                             'attributes' => array(
                                 'class' => array(
                                     'wrap'
@@ -319,47 +318,146 @@ class Plugin_Manager {
                             ),
                             'inner_elements' => array(  
                                 array(
-                                    'tag' => 'select',
+                                    'tag' => 'p',
                                     'attributes' => array(
-                                        'id' => 'expiration_time',
-                                        'class' => array(
-                                            'wrap'
-                                        )
+                                        'class' => 'wrap'
                                     ),
-                                    'script' => new Script_JS( 
+                                    'inner_elements' => array(  
                                         array(
-                                            'name' => 'admin-select-js',
-                                            'src' => 'elements-select.js',
-                                            'dependencies' => array(),
-                                            'version' => '1.0',
-                                            'in_footer' => true,
-                                            'object_name' => 'selectList',
-                                            'object_params' => array(
+                                            'tag' => 'select',
+                                            'attributes' => array(
+                                                'id' => 'expiration_time'
+                                            ),
+                                            'inner_elements' => array(
                                                 array(
-                                                    'text' => 'item 1',
-                                                    'value' => 200,
-                                                    'select' => true
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => 'Item 1',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'value' => 'option-1'
+                                                    )
+                                                ),
+                                                array(
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => 'Item 2',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'selected' => 'true',
+                                                        'value' => 'option-2'
+                                                    )
                                                 )
                                             )
-                                        ),
-                                        new Script_JS_Register(),
-                                        new Script_Validator()
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        array(
+                            'tag' => 'div',
+                            'text' => array(
+                                'value' => 'Service Parcel',
+                                'priority' => 'before'
+                            ),
+                            'attributes' => array(
+                                'class' => array(
+                                    'wrap'
+                                ),
+                            ),
+                            'inner_elements' => array(  
+                                array(
+                                    'tag' => 'p',
+                                    'attributes' => array(
+                                        'class' => 'wrap'
+                                    ),
+                                    'inner_elements' => array(  
+                                        array(
+                                            'tag' => 'select',
+                                            'attributes' => array(
+                                                'id' => 'service_parcel'
+                                            ),
+                                            'inner_elements' => array(
+                                                array(
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => 'Item 1',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'value' => 'option-1'
+                                                    )
+                                                ),
+                                                array(
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => 'Item 2',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'selected' => 'true',
+                                                        'value' => 'option-2'
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        array(
+                            'tag' => 'div',
+                            'text' => array(
+                                'value' => 'Contract ID',
+                                'priority' => 'before'
+                            ),
+                            'attributes' => array(
+                                'class' => array(
+                                    'wrap'
+                                ),
+                            ),
+                            'inner_elements' => array(  
+                                array(
+                                    'tag' => 'p',
+                                    'attributes' => array(
+                                        'class' => 'wrap'
+                                    ),
+                                    'inner_elements' => array(  
+                                        array(
+                                            'tag' => 'select',
+                                            'attributes' => array(
+                                                'id' => 'contract_id'
+                                            ),
+                                            'inner_elements' => array(
+                                                array(
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => 'Item 1',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'selected' => 'true',
+                                                        'value' => 'option-1'
+                                                    )
+                                                ),
+                                                array(
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => 'Item 2',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'value' => 'option-2'
+                                                    )
+                                                )
+                                            )
+                                        )
                                     )
                                 )
                             )
                         )
-                        // array(
-                        //     'name' => 'expiration_time',
-                        //     'tag' => 'select'
-                        // ),
-                        // array(
-                        //     'name' => 'service_parcel',
-                        //     'tag' => 'select'
-                        // ),
-                        // array(
-                        //     'name' => 'contract_id',
-                        //     'tag' => 'select'
-                        // ),
                     )
                 )
                 // 'title',

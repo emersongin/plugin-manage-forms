@@ -8,9 +8,6 @@
         private $attributes = array();
         private $inner_elements = array();
 
-        protected $script = null;
-        protected $style_sheet = null;
-
         public function __construct( Array $element ) {
             if ( isset( $element['tag'] ) ) {
                 $this->tag = $element['tag'];
@@ -85,7 +82,7 @@
                 }     
             echo ">"; 
             
-            if ( $text ) { echo $text; }
+            if ( isset( $text['priority'] ) and $text['priority'] == 'before' ) { echo $text['value']; }
 
             if ( count( $elements ) ) {
                 foreach ( $elements as $element ) {
@@ -93,6 +90,8 @@
 
                 }
             }
+
+            if ( isset( $text['priority'] ) and $text['priority'] == 'after' ) { echo $text['value']; }
             
             echo "</" . $tag . ">";
             

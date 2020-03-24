@@ -2,10 +2,10 @@
 
     defined( 'ABSPATH' ) || exit;
 
-    class Select_Element extends Elements {
+    class Label_Element extends Elements {
 
         public function __construct( Array $element ) {
-            $element['tag'] = 'select';
+            $element['tag'] = 'label';
             parent::__construct( $element );
 
         }
