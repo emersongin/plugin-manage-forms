@@ -185,7 +185,7 @@ class Plugin_Manager {
                     'title' => __( 'Services', TEXT_DOMAIN ),
                     'post_type' => 'authforms',
                     'context' => 'normal',
-                    'priority' => 'low',
+                    'priority' => 'default',
                     'meta_fields' => array(
                         array(
                             'tag' => 'div',
@@ -231,6 +231,11 @@ class Plugin_Manager {
                                 'class' => array(
                                     'wrap'
                                 ),
+                                'style' => array(
+                                    'background-color: #B4B9BE;',
+                                    'border-radius: 4px;',
+                                    'padding: 6px;'
+                                )
                             ),
                             'inner_elements' => array(
                                 array(
@@ -293,6 +298,23 @@ class Plugin_Manager {
                                             )
                                         )
                                     )
+                                ),
+                                array(
+                                    'tag' => 'div',
+                                    'text' => array(
+                                        'value' => 'Total 0,00',
+                                        'priority' => 'before'
+                                    ),
+                                    'attributes' => array(
+                                        'id' => 'list-items-total',
+                                        'style' => array(
+                                            'float: right;',
+                                            'padding: 4px;',
+                                            'background-color: white;',
+                                            'border-radius: 2px;',
+                                            'font-weight: 800'
+                                        )
+                                    )
                                 )
                             )
                         )
@@ -302,8 +324,8 @@ class Plugin_Manager {
                     'id' => 'settings_meta_box',
                     'title' => __( 'Settings', TEXT_DOMAIN ),
                     'post_type' => 'authforms',
-                    'context' => 'side',
-                    'priority' => 'low',
+                    'context' => 'normal',
+                    'priority' => 'default',
                     'meta_fields' => array(
                         array(
                             'tag' => 'div',
@@ -326,30 +348,44 @@ class Plugin_Manager {
                                         array(
                                             'tag' => 'select',
                                             'attributes' => array(
-                                                'id' => 'expiration_time'
+                                                'id' => 'expiration_time',
+                                                'style' => array(
+                                                    'width: 300px;'
+                                                )
                                             ),
                                             'inner_elements' => array(
                                                 array(
                                                     'tag' => 'option',
                                                     'text' => array(
-                                                        'value' => 'Item 1',
+                                                        'value' => 'Selecione a duração',
                                                         'priority' => 'before'
                                                     ),
                                                     'attributes' => array(
-                                                        'value' => 'option-1'
+                                                        'value' => '',
+                                                        'disabled' => 'true',
+                                                        'selected' => 'true'
                                                     )
                                                 ),
                                                 array(
                                                     'tag' => 'option',
                                                     'text' => array(
-                                                        'value' => 'Item 2',
+                                                        'value' => '30 Minutos',
                                                         'priority' => 'before'
                                                     ),
                                                     'attributes' => array(
-                                                        'selected' => 'true',
-                                                        'value' => 'option-2'
+                                                        'value' => '1'
                                                     )
-                                                )
+                                                ),
+                                                array(
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => '1 Hora',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'value' => '2'
+                                                    )
+                                                ),
                                             )
                                         )
                                     )
@@ -377,30 +413,44 @@ class Plugin_Manager {
                                         array(
                                             'tag' => 'select',
                                             'attributes' => array(
-                                                'id' => 'service_parcel'
+                                                'id' => 'service_parcel',
+                                                'style' => array(
+                                                    'width: 300px;'
+                                                )
                                             ),
                                             'inner_elements' => array(
                                                 array(
                                                     'tag' => 'option',
                                                     'text' => array(
-                                                        'value' => 'Item 1',
+                                                        'value' => 'Selecione quantidade de parcelas',
                                                         'priority' => 'before'
                                                     ),
                                                     'attributes' => array(
-                                                        'value' => 'option-1'
+                                                        'value' => '',
+                                                        'disabled' => 'true',
+                                                        'selected' => 'true'
                                                     )
                                                 ),
                                                 array(
                                                     'tag' => 'option',
                                                     'text' => array(
-                                                        'value' => 'Item 2',
+                                                        'value' => '( 1x parcela ) à vista ',
                                                         'priority' => 'before'
                                                     ),
                                                     'attributes' => array(
-                                                        'selected' => 'true',
-                                                        'value' => 'option-2'
+                                                        'value' => '1'
                                                     )
-                                                )
+                                                ),
+                                                array(
+                                                    'tag' => 'option',
+                                                    'text' => array(
+                                                        'value' => '( 2x parcela )',
+                                                        'priority' => 'before'
+                                                    ),
+                                                    'attributes' => array(
+                                                        'value' => '2'
+                                                    )
+                                                ),
                                             )
                                         )
                                     )
@@ -428,30 +478,34 @@ class Plugin_Manager {
                                         array(
                                             'tag' => 'select',
                                             'attributes' => array(
-                                                'id' => 'contract_id'
+                                                'id' => 'contract_id',
+                                                'style' => array(
+                                                    'width: 300px;'
+                                                )
                                             ),
                                             'inner_elements' => array(
                                                 array(
                                                     'tag' => 'option',
                                                     'text' => array(
-                                                        'value' => 'Item 1',
+                                                        'value' => 'Selecione o termo',
                                                         'priority' => 'before'
                                                     ),
                                                     'attributes' => array(
-                                                        'selected' => 'true',
-                                                        'value' => 'option-1'
+                                                        'value' => '',
+                                                        'disabled' => 'true',
+                                                        'selected' => 'true'
                                                     )
                                                 ),
                                                 array(
                                                     'tag' => 'option',
                                                     'text' => array(
-                                                        'value' => 'Item 2',
+                                                        'value' => 'termo 01',
                                                         'priority' => 'before'
                                                     ),
                                                     'attributes' => array(
-                                                        'value' => 'option-2'
+                                                        'value' => '1'
                                                     )
-                                                )
+                                                ),
                                             )
                                         )
                                     )

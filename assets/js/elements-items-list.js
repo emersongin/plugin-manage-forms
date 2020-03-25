@@ -2,6 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     let divItemsList = document.getElementById( itemsList.id );
     let addButton = document.getElementById( itemsList.id + '-add' );
+    let divTotal = document.getElementById( itemsList.id + '-total' );
+    let itemsTotalValues = document.getElementsByClassName("items-list-value");
+    let itemsTotalDeletes = document.getElementsByClassName("items-list-delete");
 
     let item = {
         init: function() {
@@ -32,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         setClass: function() {
             this.inputText.classList.add("regular-text");
-            this.inputValue.classList.add("all-options");
-            this.button.classList.add("button-secondary");
+            this.inputValue.classList.add("all-options", "items-list-value");
+            this.button.classList.add("button-secondary", "items-list-delete");
 
             this.icon.classList.add("dashicons");
             this.icon.classList.add("dashicons-trash");
@@ -41,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         setStyle: function() {
             this.icon.style.marginTop = "3px";
+            this.p.style.margin = "4px";
 
         },
         new: function( text = '', value = 0 ) {
@@ -95,6 +99,28 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         divItemsList.appendChild( item.new('', 0) );
+        updateTotal();
+
     });
+
+    function updateTotal() {
+        let total = 0;
+
+        for (let index = 0; index < itemsTotalValues.length; index++) {
+            let value = parseFloat(itemsTotalValues[index].value);
+            
+            value = isNaN(value) ? 0 : value;
+            total += value;
+
+            itemsTotalValues[index].addEventListener('change', updateTotal);
+            itemsTotalDeletes[index].addEventListener('click', updateTotal);
+            
+        }
+
+        divTotal.innerHTML = "Total " + total.toFixed(2);
+
+    }
+
+    updateTotal();
 
 });
