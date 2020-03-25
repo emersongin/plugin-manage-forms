@@ -1,0 +1,15 @@
+
+{
+    "name": "authforms",
+    "menu_icon": "dashicons-admin-page",
+    "menu_position": 20,
+    "labels": {
+        "name": "Forms",
+        "singular_name": "Form",
+        "all_items": "All forms"
+    },
+    "description": "Any things...",
+    "public": true,
+    "supports": ["title","editor"],
+    "meta_boxes": []
+}

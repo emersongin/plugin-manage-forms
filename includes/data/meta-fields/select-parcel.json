@@ -1,0 +1,63 @@
+
+{
+    "tag": "div",
+    "text": {
+        "value": "Service Parcel",
+        "priority": "before"
+    },
+    "attributes": {
+        "class": ["wrap"]
+    },
+    "inner_elements": [
+        {
+            "tag": "p",
+            "attributes": {
+                "class": "wrap"
+            },
+            "inner_elements": [
+                {
+                    "tag": "select",
+                    "attributes": {
+                        "id": "service_parcel",
+                        "style": ["width: 300px;"]
+                    }
+                    ,
+                    "inner_elements": [
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "Selecione quantidade de parcelas",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "",
+                                "disabled": "true",
+                                "selected": "true"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 1x parcela ) À vista ",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "1"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 2x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "2"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

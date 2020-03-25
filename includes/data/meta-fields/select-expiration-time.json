@@ -1,0 +1,64 @@
+
+{
+    "tag": "div",
+    "text": {
+        "value": "Expiration Time",
+        "priority": "before"
+    },
+    "attributes": {
+        "class": [
+            "wrap"
+        ]
+    },
+    "inner_elements": [
+        {
+            "tag": "p",
+            "attributes": {
+                "class": "wrap"
+            },
+            "inner_elements": [
+                {
+                    "tag": "select",
+                    "attributes": {
+                        "id": "expiration_time",
+                        "style": ["width: 300px;"]
+                    },
+                    "inner_elements": [
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "Selecione a duração",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "",
+                                "disabled": "true",
+                                "selected": "true"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "30 Minutos",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "1"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "1 Hora",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "2"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

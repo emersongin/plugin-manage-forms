@@ -17,55 +17,61 @@ class Plugin_Manager {
     }
 
     private function create_constants() {
-        define( 'MG_FORMS_URL', plugins_url( '', MG_FORMS_FILE ) );
-        define( 'MG_FORMS_DIR', plugin_dir_path( MG_FORMS_FILE ) );
-        define( 'MG_FORMS_ADMIN_URL', admin_url( '', MG_FORMS_FILE ) );
-        define( 'MG_FORMS_ASSETS', MG_FORMS_URL . '/assets' );
+        define( 'MGF_URL', plugins_url( '', MG_FORMS_FILE ) );
+        define( 'MGF_DIR', plugin_dir_path( MG_FORMS_FILE ) );
+        define( 'MGF_ADMIN_URL', admin_url( '', MG_FORMS_FILE ) );
+
+        define( 'MGF_DIR_ABSTRACT', MGF_DIR . '/includes/abstract/' );
+        define( 'MGF_DIR_CLASS', MGF_DIR . '/includes/class/' );
+        define( 'MGF_DIR_INTERFACE', MGF_DIR . '/includes/interface/' );
+        define( 'MGF_DIR_DATA', MGF_DIR . '/includes/data/' );
+        
+        define( 'MGF_DIR_ASSETS', MGF_URL . '/assets/' );
         define( 'TEXT_DOMAIN', 'plugin-manage-forms' );
 
     }
 
     private function create_class() {
         //interfaces
-        require_once MG_FORMS_DIR . '/includes/interface/interface-script.php';
-        require_once MG_FORMS_DIR . '/includes/interface/interface-script-validator.php';
-        require_once MG_FORMS_DIR . '/includes/interface/interface-script-js-register.php';
-        require_once MG_FORMS_DIR . '/includes/interface/interface-script-js.php';
-        require_once MG_FORMS_DIR . '/includes/interface/interface-style-sheet-register.php';
-        require_once MG_FORMS_DIR . '/includes/interface/interface-style-sheet.php';
+        require_once MGF_DIR_INTERFACE . 'interface-script.php';
+        require_once MGF_DIR_INTERFACE . 'interface-script-validator.php';
+        require_once MGF_DIR_INTERFACE . 'interface-script-js-register.php';
+        require_once MGF_DIR_INTERFACE . 'interface-script-js.php';
+        require_once MGF_DIR_INTERFACE . 'interface-style-sheet-register.php';
+        require_once MGF_DIR_INTERFACE . 'interface-style-sheet.php';
 
-        require_once MG_FORMS_DIR . '/includes/interface/interface-post-type-register.php';
-        require_once MG_FORMS_DIR . '/includes/interface/interface-post-type.php';
+        require_once MGF_DIR_INTERFACE . 'interface-post-type-register.php';
+        require_once MGF_DIR_INTERFACE . 'interface-post-type.php';
 
-        require_once MG_FORMS_DIR . '/includes/interface/interface-elements-factory.php';
-        require_once MG_FORMS_DIR . '/includes/interface/interface-elements.php';
+        require_once MGF_DIR_INTERFACE . 'interface-elements-factory.php';
+        require_once MGF_DIR_INTERFACE . 'interface-elements.php';
 
         //abstracts
-        require_once MG_FORMS_DIR . '/includes/abstract/abstract-elements.php';
-        require_once MG_FORMS_DIR . '/includes/abstract/abstract-custom-post-type.php';
-        require_once MG_FORMS_DIR . '/includes/abstract/abstract-script.php';
+        require_once MGF_DIR_ABSTRACT . 'abstract-elements.php';
+        require_once MGF_DIR_ABSTRACT . 'abstract-custom-post-type.php';
+        require_once MGF_DIR_ABSTRACT . 'abstract-script.php';
         
         //class
-        require_once MG_FORMS_DIR . '/includes/class/scripts/class-script-validator.php';
-        require_once MG_FORMS_DIR . '/includes/class/scripts/class-script-js-register.php';
-        require_once MG_FORMS_DIR . '/includes/class/scripts/class-script-js.php';
-        require_once MG_FORMS_DIR . '/includes/class/scripts/class-style-sheet-register.php';
-        require_once MG_FORMS_DIR . '/includes/class/scripts/class-style-sheet.php';
+        require_once MGF_DIR_CLASS . 'scripts/class-script-validator.php';
+        require_once MGF_DIR_CLASS . 'scripts/class-script-js-register.php';
+        require_once MGF_DIR_CLASS . 'scripts/class-script-js.php';
+        require_once MGF_DIR_CLASS . 'scripts/class-style-sheet-register.php';
+        require_once MGF_DIR_CLASS . 'scripts/class-style-sheet.php';
 
-        require_once MG_FORMS_DIR . '/includes/class/post-types/class-post-type-register.php';
-        require_once MG_FORMS_DIR . '/includes/class/post-types/class-authforms.php';
-        // require_once MG_FORMS_DIR . '/includes/class/post-types/class-terms.php';
+        require_once MGF_DIR_CLASS . 'post-types/class-post-type-register.php';
+        require_once MGF_DIR_CLASS . 'post-types/class-authforms.php';
+        // require_once MGF_DIR_CLASS . 'post-types/class-terms.php';
 
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-elements-factory.php';
+        require_once MGF_DIR_CLASS . 'elements/class-elements-factory.php';
 
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-div.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-p.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-label.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-input.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-button.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-span.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-select.php';
-        require_once MG_FORMS_DIR . '/includes/class/elements/class-element-option.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-div.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-p.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-label.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-input.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-button.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-span.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-select.php';
+        require_once MGF_DIR_CLASS . 'elements/class-element-option.php';
 
     }
 
@@ -165,355 +171,37 @@ class Plugin_Manager {
     }
 
     public function create_post_type_authforms() {
-        $post_type_data = array(
-            'name' => 'authforms',
-            'menu_icon' => 'dashicons-admin-page',
-            'menu_position' => 20,
-            'labels' => array(
-                'name' => __( 'Forms', TEXT_DOMAIN ),
-                'singular_name' => __( 'Form', TEXT_DOMAIN ),
-                'all_items' => __( 'All forms', TEXT_DOMAIN )
-            ),
-            'description' => 'Any things...',
-            'public' => true,
-            'supports' => array(
-                'title', 'editor'
-            ),
-            'meta_boxes' => array(
-                array(
-                    'id' => 'services_meta_box',
-                    'title' => __( 'Services', TEXT_DOMAIN ),
-                    'post_type' => 'authforms',
-                    'context' => 'normal',
-                    'priority' => 'default',
-                    'meta_fields' => array(
-                        array(
-                            'tag' => 'div',
-                            'attributes' => array(
-                                'class' => array(
-                                    'wrap'
-                                ),
-                            ),
-                            'inner_elements' => array(
-                                array(
-                                    'tag' => 'label',
-                                    'text' => array(
-                                        'value' => __( 'Service Title', TEXT_DOMAIN ),
-                                        'priority' => 'before'
-                                    ),
-                                    'attributes' => array(
-                                        'for' => 'service-title'
-                                    )
-                                ),
-                                array(
-                                    'tag' => 'input',
-                                    'attributes' => array(
-                                        'id' => 'service-title',
-                                        'name' => 'service-title',
-                                        'type' => 'text',
-                                        'class' => array(
-                                            'large-text',
-                                            'wrap'
-                                        ),
-                                        'placeholder' => 'title text',
-                                        'required' => true
-                                    )
-                                )
-                            )
-                        ),
-                        array(
-                            'tag' => 'div',
-                            'text' => array(
-                                'value' => 'Items List',
-                                'priority' => 'before'
-                            ),
-                            'attributes' => array(
-                                'class' => array(
-                                    'wrap'
-                                ),
-                                'style' => array(
-                                    'background-color: #B4B9BE;',
-                                    'border-radius: 4px;',
-                                    'padding: 6px;'
-                                )
-                            ),
-                            'inner_elements' => array(
-                                array(
-                                    'tag' => 'div',
-                                    'attributes' => array(
-                                        'id' => 'list-items'
-                                    ),
-                                    'script' => new Script_JS( 
-                                        array(
-                                            'name' => 'admin-items-list-js',
-                                            'src' => 'elements-items-list.js',
-                                            'dependencies' => array(),
-                                            'version' => '1.0',
-                                            'in_footer' => true,
-                                            'object_name' => 'itemsList',
-                                            'object_params' => array(
-                                                'id' => 'list-items',
-                                                'items' => array(
-                                                    array(
-                                                        'text' => 'item 1',
-                                                        'value' => 200
-                                                    ),
-                                                    array(
-                                                        'text' => 'item 2',
-                                                        'value' => 150
-                                                    ),
-                                                    array(
-                                                        'text' => 'item 3',
-                                                        'value' => 10.5
-                                                    )
-                                                )
-                                            )
-                                        ),
-                                        new Script_JS_Register(),
-                                        new Script_Validator()
-                                    )
-                                ),
-                                array(
-                                    'tag' => 'button',
-                                    'text' => array(
-                                        'value' => 'Add item',
-                                        'priority' => 'after'
-                                    ),
-                                    'attributes' => array(
-                                        'id' => 'list-items-add',
-                                        'type' => 'button',
-                                        'class' => array(
-                                            'button-primary'
-                                        )
-                                    ),
-                                    'inner_elements' => array(
-                                        array(
-                                            'tag' => 'span',
-                                            'attributes' => array(
-                                                'style' => 'margin-top: 6px;',
-                                                'class' => array(
-                                                    'dashicons',
-                                                    'dashicons-plus'
-                                                )
-                                            )
-                                        )
-                                    )
-                                ),
-                                array(
-                                    'tag' => 'div',
-                                    'text' => array(
-                                        'value' => 'Total 0,00',
-                                        'priority' => 'before'
-                                    ),
-                                    'attributes' => array(
-                                        'id' => 'list-items-total',
-                                        'style' => array(
-                                            'float: right;',
-                                            'padding: 4px;',
-                                            'background-color: white;',
-                                            'border-radius: 2px;',
-                                            'font-weight: 800'
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                ),
-                array(
-                    'id' => 'settings_meta_box',
-                    'title' => __( 'Settings', TEXT_DOMAIN ),
-                    'post_type' => 'authforms',
-                    'context' => 'normal',
-                    'priority' => 'default',
-                    'meta_fields' => array(
-                        array(
-                            'tag' => 'div',
-                            'text' => array(
-                                'value' => 'Expiration Time',
-                                'priority' => 'before'
-                            ),
-                            'attributes' => array(
-                                'class' => array(
-                                    'wrap'
-                                ),
-                            ),
-                            'inner_elements' => array(  
-                                array(
-                                    'tag' => 'p',
-                                    'attributes' => array(
-                                        'class' => 'wrap'
-                                    ),
-                                    'inner_elements' => array(  
-                                        array(
-                                            'tag' => 'select',
-                                            'attributes' => array(
-                                                'id' => 'expiration_time',
-                                                'style' => array(
-                                                    'width: 300px;'
-                                                )
-                                            ),
-                                            'inner_elements' => array(
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => 'Selecione a duração',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '',
-                                                        'disabled' => 'true',
-                                                        'selected' => 'true'
-                                                    )
-                                                ),
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => '30 Minutos',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '1'
-                                                    )
-                                                ),
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => '1 Hora',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '2'
-                                                    )
-                                                ),
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        array(
-                            'tag' => 'div',
-                            'text' => array(
-                                'value' => 'Service Parcel',
-                                'priority' => 'before'
-                            ),
-                            'attributes' => array(
-                                'class' => array(
-                                    'wrap'
-                                ),
-                            ),
-                            'inner_elements' => array(  
-                                array(
-                                    'tag' => 'p',
-                                    'attributes' => array(
-                                        'class' => 'wrap'
-                                    ),
-                                    'inner_elements' => array(  
-                                        array(
-                                            'tag' => 'select',
-                                            'attributes' => array(
-                                                'id' => 'service_parcel',
-                                                'style' => array(
-                                                    'width: 300px;'
-                                                )
-                                            ),
-                                            'inner_elements' => array(
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => 'Selecione quantidade de parcelas',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '',
-                                                        'disabled' => 'true',
-                                                        'selected' => 'true'
-                                                    )
-                                                ),
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => '( 1x parcela ) à vista ',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '1'
-                                                    )
-                                                ),
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => '( 2x parcela )',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '2'
-                                                    )
-                                                ),
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        ),
-                        array(
-                            'tag' => 'div',
-                            'text' => array(
-                                'value' => 'Contract ID',
-                                'priority' => 'before'
-                            ),
-                            'attributes' => array(
-                                'class' => array(
-                                    'wrap'
-                                ),
-                            ),
-                            'inner_elements' => array(  
-                                array(
-                                    'tag' => 'p',
-                                    'attributes' => array(
-                                        'class' => 'wrap'
-                                    ),
-                                    'inner_elements' => array(  
-                                        array(
-                                            'tag' => 'select',
-                                            'attributes' => array(
-                                                'id' => 'contract_id',
-                                                'style' => array(
-                                                    'width: 300px;'
-                                                )
-                                            ),
-                                            'inner_elements' => array(
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => 'Selecione o termo',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '',
-                                                        'disabled' => 'true',
-                                                        'selected' => 'true'
-                                                    )
-                                                ),
-                                                array(
-                                                    'tag' => 'option',
-                                                    'text' => array(
-                                                        'value' => 'termo 01',
-                                                        'priority' => 'before'
-                                                    ),
-                                                    'attributes' => array(
-                                                        'value' => '1'
-                                                    )
-                                                ),
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
+        $post_type = $this->get_data( 'post-types/post-type-authforms.json' ); 
+        
+        $metabox_service = $this->get_data( 'meta-boxes/meta-boxes-auth-service.json' );
+        $metabox_setting = $this->get_data( 'meta-boxes/meta-boxes-auth-settings.json' );
+
+        $metafield_title = $this->get_data( 'meta-fields/input-service-title.json' );
+        $metafield_items_list = $this->get_data( 'meta-fields/itemslist-service.json' );
+
+        new Script_JS( $metafield_items_list['script'], new Script_JS_Register(), new Script_Validator());
+
+        $metafield_select_time = $this->get_data( 'meta-fields/select-expiration-time.json' );
+        $metafield_select_parcel = $this->get_data( 'meta-fields/select-parcel.json' );
+        $metafield_select_term = $this->get_data( 'meta-fields/select-terms.json' );
+
+        $metabox_setting['meta_fields'] = [
+            $metafield_select_time,
+            $metafield_select_parcel,
+            $metafield_select_term
+        ];
+
+        $metabox_service['meta_fields'] = [
+            $metafield_title,
+            $metafield_items_list
+        ];
+
+        $post_type['meta_boxes'] = [
+            $metabox_service,
+            $metabox_setting
+        ];
+
+
                 // 'title',
                 // 'content',
                 // 'status',
@@ -526,14 +214,19 @@ class Plugin_Manager {
                 // 'origin',
                 // 'document_create_by',
                 // 'document_create_at'
-            )
-        );
-        $post_type = new AuthForms_Post_Type( $post_type_data, new Elements_Factory() );
+
+        $post_type = new AuthForms_Post_Type( $post_type, new Elements_Factory() );
 
         $register = new Post_Type_Register();
         $register->register( $post_type );
 
         add_action( 'add_meta_boxes', array( $post_type, 'create_meta_boxes' ) );
+
+
+    }
+
+    public function get_data( $path ) {
+        return json_decode( file_get_contents( MGF_DIR_DATA . $path ), true );
 
     }
 

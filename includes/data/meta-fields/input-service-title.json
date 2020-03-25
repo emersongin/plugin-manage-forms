@@ -1,0 +1,30 @@
+
+{
+    "tag": "div",
+    "attributes": {
+        "class": ["wrap"]
+    },
+    "inner_elements": [
+        {
+            "tag": "label",
+            "text": {
+                "value": "Service Title",
+                "priority": "before"
+            },
+            "attributes": {
+                "for": "service-title"
+            }
+        },
+        {
+            "tag": "input",
+            "attributes": {
+                "id": "service-title",
+                "name": "service-title",
+                "type": "text",
+                "class": ["large-text","wrap"],
+                "placeholder": "title text",
+                "required": true
+            }
+        }
+    ]
+}

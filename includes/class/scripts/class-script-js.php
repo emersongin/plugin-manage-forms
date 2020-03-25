@@ -15,7 +15,7 @@
 
             parent::__construct( $script_data, $register, $validator );
 
-            $this->src = MG_FORMS_ASSETS . '/js/' . $script_data['src'];
+            $this->src = MGF_DIR_ASSETS . 'js/' . $script_data['src'];
             $this->footer = $script_data['in_footer'];
             $this->object_name = $script_data['object_name'];
             $this->object_params = $script_data['object_params'];

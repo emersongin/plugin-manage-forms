@@ -12,7 +12,7 @@
             ) {
             parent::__construct( $style_data, $register, $validator );
 
-            $this->src = MG_FORMS_ASSETS . '/css/' . $style_data['src'];
+            $this->src = MGF_DIR_ASSETS . 'css/' . $style_data['src'];
             $this->media = $style_data['media'];
 
             $this->registration();

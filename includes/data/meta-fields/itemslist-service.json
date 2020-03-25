@@ -1,0 +1,90 @@
+
+{
+    "tag": "div",
+    "text": {
+        "value": "Items List",
+        "priority": "before"
+    },
+    "attributes": {
+        "class": ["wrap"],
+        "style": [
+            "background-color: #B4B9BE;",
+            "border-radius: 4px;",
+            "padding: 6px;"
+        ]
+    },
+    "inner_elements": [
+        {
+            "tag": "div",
+            "attributes": {
+                "id": "list-items"
+            }
+        },
+        {
+            "tag": "button",
+            "text": {
+                "value": "Add item",
+                "priority": "after"
+            },
+            "attributes": {
+                "id": "list-items-add",
+                "type": "button",
+                "class": ["button-primary"]
+            },
+            "inner_elements": [
+                {
+                    "tag": "span",
+                    "attributes": {
+                        "style": "margin-top: 6px;",
+                        "class": [
+                            "dashicons",
+                            "dashicons-plus"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "tag": "div",
+            "text": {
+                "value": "Total 0,00",
+                "priority": "before"
+            },
+            "attributes": {
+                "id": "list-items-total",
+                "style": [
+                    "float: right;",
+                    "padding: 4px;",
+                    "background-color: white;",
+                    "border-radius: 2px;",
+                    "font-weight: 800"
+                ]
+            }
+        }
+    ],
+    "script": {
+        "name": "admin-items-list-js",
+        "src": "elements-items-list.js",
+        "dependencies": [],
+        "version": "1.0",
+        "in_footer":true,
+        "object_name": "itemsList",
+        "object_params": {
+            "id": "list-items",
+            "items": [
+                {
+                    "text": "item 1",
+                    "value":200
+                },
+                {
+                    "text": "item 2",
+                    "value":150
+                },
+                {
+                    "text": "item 3",
+                    "value":10.5
+                }
+            ]
+        }
+    }
+}

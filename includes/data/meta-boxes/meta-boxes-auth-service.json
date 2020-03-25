@@ -1,0 +1,9 @@
+
+{
+    "id":"services_meta_box",
+    "title":"Services",
+    "post_type":"authforms",
+    "context":"normal",
+    "priority":"default",
+    "meta_fields":[]
+}

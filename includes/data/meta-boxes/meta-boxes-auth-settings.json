@@ -1,0 +1,9 @@
+
+{
+    "id": "settings_meta_box",
+    "title": "Settings",
+    "post_type": "authforms",
+    "context": "normal",
+    "priority": "default",
+    "meta_fields":[]
+}

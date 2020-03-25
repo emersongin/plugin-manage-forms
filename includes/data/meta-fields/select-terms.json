@@ -1,0 +1,52 @@
+
+{
+    "tag": "div",
+    "text": {
+        "value": "Contract ID",
+        "priority": "before"
+    },
+    "attributes": {
+        "class": ["wrap"]
+    },
+    "inner_elements": [
+        {
+            "tag": "p",
+            "attributes": {
+                "class": [ "wrap" ]
+            },
+            "inner_elements": [
+                {
+                    "tag": "select",
+                    "attributes": {
+                        "id": "contract_id",
+                        "style": ["width: 300px;"]
+                    },
+                    "inner_elements": [
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "Selecione o termo",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "",
+                                "disabled": "true",
+                                "selected": "true"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "termo 01",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "1"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
