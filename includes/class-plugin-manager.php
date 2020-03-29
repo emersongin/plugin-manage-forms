@@ -3,6 +3,8 @@
 defined( 'ABSPATH' ) || exit;
 
 class Plugin_Manager {
+    public $data_manager = null;
+
     public function __construct() {
         $this->setup();
 
@@ -11,8 +13,9 @@ class Plugin_Manager {
     private function setup() {
         $this->create_constants();
         $this->create_class();
-        $this->create_libraries();
+        $this->create_database();
         $this->create_settings();
+        $this->create_libraries();
 
     }
 
@@ -62,8 +65,9 @@ class Plugin_Manager {
         require_once MGF_DIR_CLASS . 'post-types/class-authforms.php';
         // require_once MGF_DIR_CLASS . 'post-types/class-terms.php';
 
-        require_once MGF_DIR_CLASS . 'elements/class-elements-factory.php';
+        require_once MGF_DIR_CLASS . 'utils/class-data-manager.php';
 
+        require_once MGF_DIR_CLASS . 'elements/class-elements-factory.php';
         require_once MGF_DIR_CLASS . 'elements/class-element-div.php';
         require_once MGF_DIR_CLASS . 'elements/class-element-p.php';
         require_once MGF_DIR_CLASS . 'elements/class-element-label.php';
@@ -72,6 +76,86 @@ class Plugin_Manager {
         require_once MGF_DIR_CLASS . 'elements/class-element-span.php';
         require_once MGF_DIR_CLASS . 'elements/class-element-select.php';
         require_once MGF_DIR_CLASS . 'elements/class-element-option.php';
+
+    }
+
+    private function create_database() {
+        add_action( 'init', array( $this, 'load_database' ) );
+
+    }
+
+    public function load_database() {
+        $this->data_manager = new Data_Manager();
+
+    }
+
+    public function create_settings() {
+        $this->create_post_types();
+
+    }
+
+    public function create_post_types() {
+        $this->create_auth_forms();
+
+    }
+
+    public function create_auth_forms() {
+        add_action( 'init', array( $this, 'create_post_type_authforms' ) );
+
+    }
+
+    public function create_post_type_authforms() {
+        $data_manager = $this->data_manager;
+
+        $post_types = $data_manager->get_data( 'post-types' );
+        $meta_boxes = $data_manager->get_data( 'meta-boxes' );
+        $meta_fields = $data_manager->get_data( 'meta-fields' );
+        
+        $auth_forms = $post_types['auth-forms']; 
+        $metabox_service = $meta_boxes['service'];
+        $metabox_setting = $meta_boxes['setting'];
+        $metafield_title = $meta_fields['title'];
+        $metafield_items_list = $meta_fields['items-list'];
+        $metafield_select_time = $meta_fields['select-exp-time'];
+        $metafield_select_parcel = $meta_fields['select-parcel'];
+        $metafield_select_term = $meta_fields['select-terms'];
+
+        $metabox_service['meta_fields'] = [
+            $metafield_title,
+            $metafield_items_list
+        ];
+
+        $metabox_setting['meta_fields'] = [
+            $metafield_select_time,
+            $metafield_select_parcel,
+            $metafield_select_term
+        ];
+
+        $auth_forms['meta_boxes'] = [
+            $metabox_service,
+            $metabox_setting
+        ];
+
+        // 'title',
+        // 'content',
+        // 'status',
+        // 'expiration_time',
+        // 'secret_key',
+        // 'service_title',
+        // 'service_items',
+        // 'service_parcel',
+        // 'contract_id',
+        // 'origin',
+        // 'document_create_by',
+        // 'document_create_at'
+
+        $auth_forms = new AuthForms_Post_Type( $auth_forms, new Elements_Factory() );
+
+        $register = new Post_Type_Register();
+        $register->register( $auth_forms );
+
+        add_action( 'add_meta_boxes', array( $auth_forms, 'create_meta_boxes' ) );
+
 
     }
 
@@ -151,82 +235,6 @@ class Plugin_Manager {
             new Script_JS_Register(),
             new Script_Validator()
         );
-
-    }
-
-    public function create_settings() {
-        $this->create_post_types();
-
-    }
-
-    public function create_post_types() {
-        $this->create_auth_forms();
-
-
-    }
-
-    public function create_auth_forms() {
-        add_action( 'init', array( $this, 'create_post_type_authforms' ) );
-
-    }
-
-    public function create_post_type_authforms() {
-        $post_type = $this->get_data( 'post-types/post-type-authforms.json' ); 
-        
-        $metabox_service = $this->get_data( 'meta-boxes/meta-boxes-auth-service.json' );
-        $metabox_setting = $this->get_data( 'meta-boxes/meta-boxes-auth-settings.json' );
-
-        $metafield_title = $this->get_data( 'meta-fields/input-service-title.json' );
-        $metafield_items_list = $this->get_data( 'meta-fields/itemslist-service.json' );
-
-        new Script_JS( $metafield_items_list['script'], new Script_JS_Register(), new Script_Validator());
-
-        $metafield_select_time = $this->get_data( 'meta-fields/select-expiration-time.json' );
-        $metafield_select_parcel = $this->get_data( 'meta-fields/select-parcel.json' );
-        $metafield_select_term = $this->get_data( 'meta-fields/select-terms.json' );
-
-        $metabox_setting['meta_fields'] = [
-            $metafield_select_time,
-            $metafield_select_parcel,
-            $metafield_select_term
-        ];
-
-        $metabox_service['meta_fields'] = [
-            $metafield_title,
-            $metafield_items_list
-        ];
-
-        $post_type['meta_boxes'] = [
-            $metabox_service,
-            $metabox_setting
-        ];
-
-
-                // 'title',
-                // 'content',
-                // 'status',
-                // 'expiration_time',
-                // 'secret_key',
-                // 'service_title',
-                // 'service_items',
-                // 'service_parcel',
-                // 'contract_id',
-                // 'origin',
-                // 'document_create_by',
-                // 'document_create_at'
-
-        $post_type = new AuthForms_Post_Type( $post_type, new Elements_Factory() );
-
-        $register = new Post_Type_Register();
-        $register->register( $post_type );
-
-        add_action( 'add_meta_boxes', array( $post_type, 'create_meta_boxes' ) );
-
-
-    }
-
-    public function get_data( $path ) {
-        return json_decode( file_get_contents( MGF_DIR_DATA . $path ), true );
 
     }
 

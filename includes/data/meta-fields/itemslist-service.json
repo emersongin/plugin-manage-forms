@@ -62,7 +62,7 @@
             }
         }
     ],
-    "script": {
+    "scripts": {
         "name": "admin-items-list-js",
         "src": "elements-items-list.js",
         "dependencies": [],

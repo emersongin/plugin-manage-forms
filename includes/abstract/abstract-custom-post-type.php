@@ -22,7 +22,14 @@
             $this->menu_icon = $post_type_data['menu_icon'];
             $this->supports = $post_type_data['supports'];
             $this->meta_boxes = $post_type_data['meta_boxes'];
+            $this->wp_list = $post_type_data['wp_list'];
             $this->elements_factory = $elements_factory;
+
+            add_filter( "manage_{$this->name}_posts_columns", array( $this, 'wp_list_header' ) );
+            add_action( "manage_{$this->name}_posts_custom_column", array( $this, 'wp_list_columns' ), 10, 2 );
+            add_filter( "manage_edit-{$this->name}_sortable_columns", array( $this, 'wp_list_table_sorting' ) );
+            add_filter( 'request', array( $this, 'wp_list_value_column_orderby' ) );
+            add_action( "save_post_{$this->name}", array( $this, 'save_post_type' ) );
 
         }
 
@@ -64,6 +71,108 @@
         public function get_meta_boxes() {
             return $this->meta_boxes;
 
+        }
+
+        public function wp_list_header( $defaults ) {
+            //$new = array();
+
+            // $new['id'] =  __( 'ID', TEXT_DOMAIN );
+            // $new['status'] =  __( 'Status', TEXT_DOMAIN );
+            // $new['title'] =  __( 'Client Name', TEXT_DOMAIN );
+            // $new['value'] = __( 'Value', TEXT_DOMAIN );
+            // $new['expiration'] = __( 'Expires In', TEXT_DOMAIN );
+            // $new['actions'] = __( 'Actions', TEXT_DOMAIN );
+            // $new['created'] = __( 'Created by', TEXT_DOMAIN );
+            // $new['date'] =  __( 'In', TEXT_DOMAIN );
+
+            return $this->wp_list['header'];
+
+        }
+
+        public function wp_list_columns( $column_name, $post_id ) {            
+            switch ( $column_name ) {
+                case 'id':
+                    echo $post_id;
+
+                    break;
+                case 'status':
+                    $status = get_post_meta( $post_id, '_doc_status', true );
+                    echo $status;
+
+                    break;
+                case 'value':
+                    $value = get_post_meta( $post_id, '_doc_value', true );
+                    echo $value;
+
+                    break;
+                case 'expiration':
+                    $expiration = get_post_meta( $post_id, '_doc_expiration', true );
+                    echo $expiration;
+
+                    break;
+                case 'actions':
+                    echo $this->colum_action_buttons( $post_id );
+
+                    break;
+                case 'created':
+                    $create_by = get_post_meta( $post_id, '_doc_create_by', true );
+                    echo $create_by;
+
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+        
+        }
+
+        public function wp_list_table_sorting( $columns ) {
+            $columns['value'] = 'value';
+
+            return $columns;
+        }
+
+        public function wp_list_value_column_orderby( $vars ) {
+            if ( isset( $vars['orderby'] ) && 'value' == $vars['orderby'] ) {
+                $vars = array_merge( $vars, array(
+                    'meta_key' => '_doc_value',
+                    'orderby' => 'meta_value'
+                ) );
+            }
+        
+            return $vars;
+        }
+
+        public function colum_action_buttons( $id ) {
+            $class = "button action deb-m-0-5";
+            $data = " data-button='{$id}' disabled ";
+    
+            return  
+                "<div style='position: relative !important'>".
+                "<div class='div-block'><div class='lds-dual-ring'></div></div>".    
+                "<button {$data}class='btn-edit {$class}' title='Editar'><i class='fas fa-edit'></i></button>".
+                "<button {$data}class='btn-reac {$class}' title='Reativar'><i class='far fa-clock'></i></button>". 
+                "<button {$data}class='btn-disb {$class}' title='Desativar'><i class='fas fa-times-circle'></i></button>". 
+                "<button {$data}class='btn-link {$class}' title='Link'><i class='fas fa-link'></i></button>". 
+                "<button {$data}class='btn-file {$class}' title='Arquivo'><i class='fas fa-file'></i></button>".
+                "<div>";
+    
+        }
+
+        public function save_post_type( $post_id ){
+            global $post; 
+
+            if ( $post->post_type != $this->name ){
+                return;
+                
+            }
+
+            //echo $_POST;
+
+            // Update the meta field in the database.
+            update_post_meta( $post_id, '_service_title', $_POST['service-title'] );
+
+            
         }
 
     }

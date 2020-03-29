@@ -63,6 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
         
                 p.remove();
+                if ( itemsTotalValues.length <= 0 ) {
+                    divItemsList.appendChild( item.new('', 0) );
+
+                }
 
             });
 

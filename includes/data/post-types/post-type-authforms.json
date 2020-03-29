@@ -8,6 +8,18 @@
         "singular_name": "Form",
         "all_items": "All forms"
     },
+    "wp_list": {
+        "header": {
+            "id": "ID",
+            "status": "Status",
+            "title": "Client Name",
+            "value": "Value",
+            "expiration": "Expires In",
+            "actions": "Actions",
+            "created": "Created by",
+            "date": "In"
+        }
+    },
     "description": "Any things...",
     "public": true,
     "supports": ["title","editor"],
