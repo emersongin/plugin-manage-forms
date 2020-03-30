@@ -12,14 +12,15 @@
                 "priority": "before"
             },
             "attributes": {
-                "for": "service-title"
+                "for": "service_title"
             }
         },
         {
             "tag": "input",
+            "insert_value": true,
             "attributes": {
-                "id": "service-title",
-                "name": "service-title",
+                "id": "service_title",
+                "name": "service_title",
                 "type": "text",
                 "class": ["large-text","wrap"],
                 "placeholder": "title text",

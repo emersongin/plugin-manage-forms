@@ -31,37 +31,32 @@
 
             foreach ( $meta_box['args'] as $key => $meta_field ) {
                 if ( $meta_field['tag'] ) {
-                    $field = $this->create_element( $meta_field );
+                    $field = $this->create_element( $post, $meta_field );
                     $field->append();
 
                 }
 
             }   
 
-            $data = array(
-                'name' => "fill-admin-auth-forms-js",
-                'src' => "fill-admin-auth-forms.js",
-                'dependencies' => array(),
-                'version' => "1.0",
-                'in_footer' => true,
-                'object_name' => "postTypeData",
-                'object_params' => array(
-                    "id" => "list-items",
-                    'items' => [
-                        array(
-                            'key' => 'service-title',
-                            'value' => get_post_meta( $post->ID, '_service_title', true )
-                        )
-                    ]
-                )
-            );
-
-            new Script_JS( $data, new Script_JS_Register(), new Script_Validator() );
-
         }
 
-        private function create_element( $meta_field ) {
+        private function create_element( $post, $meta_field ) {
             $element = null;
+
+            if ( isset( $meta_field['insert_value'] ) ) {
+                $meta_field = $this->add_value( $post, $meta_field );
+
+                if ( isset( $meta_field['scripts'] ) ) {
+                    new Script_JS( $meta_field['scripts'], new Script_JS_Register(), new Script_Validator() );
+    
+                }
+    
+                if ( isset( $meta_field['styles'] ) ) {
+                    new Style_Sheet( $meta_field['scripts'], new Style_Sheet_Register(), new Script_Validator() );
+    
+                }
+
+            }
 
             switch ( $meta_field['tag'] ) {
                 case 'div':
@@ -103,13 +98,38 @@
 
             if ( isset( $meta_field['inner_elements'] ) and count( $meta_field['inner_elements'] ) ) {
                 foreach ( $meta_field['inner_elements'] as $key => $inner_field ) {
-                    $element->add_element( $this->create_element( $inner_field ) );
+                    $element->add_element( $this->create_element( $post, $inner_field ) );
     
                 }
 
             }
 
             return $element;
+
+        }
+
+        private function add_value( $post, $meta_field ) {
+            $data = '';
+
+            switch ( $meta_field['tag'] ) {
+                case 'input':
+                    $slug = $meta_field['attributes']['id'];
+                    $data = get_post_meta( $post->ID, "_{$slug}", true );
+                    $meta_field['attributes']['value'] = $data;
+                    break;
+
+                case 'div':
+                    $slug = $meta_field['attributes']['id'];
+                    $data = get_post_meta( $post->ID, "_{$slug}", true );
+                    $meta_field['scripts']['object_params']['items'] = $data;
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            
+
+            return $meta_field;
 
         }
 

@@ -160,17 +160,24 @@
         }
 
         public function save_post_type( $post_id ){
-            global $post; 
+            global $post;
+            $item_list = array();
 
             if ( $post->post_type != $this->name ){
                 return;
                 
             }
 
-            //echo $_POST;
-
+            foreach ( $_POST['item_service_text'] as $key => $value ) {
+                $item_list[] = array(
+                    'text' => $value,
+                    'value' => $_POST['item_service_value'][$key]
+                );
+            }
+            
             // Update the meta field in the database.
-            update_post_meta( $post_id, '_service_title', $_POST['service-title'] );
+            update_post_meta( $post_id, '_service_title', $_POST['service_title'] );
+            update_post_meta( $post_id, '_list_items', $item_list );
 
             
         }

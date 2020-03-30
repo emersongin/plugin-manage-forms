@@ -22,10 +22,12 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         setAttributes: function() {
             this.inputText.setAttribute("type", "text");
+            this.inputText.setAttribute("name", "item_service_text[]");
             this.inputText.setAttribute("placeholder", "item text");
             this.inputText.required = true;
 
             this.inputValue.setAttribute("type", "number");
+            this.inputValue.setAttribute("name", "item_service_value[]");
             this.inputValue.setAttribute("placeholder", "item value");
             this.inputValue.required = true;
 
@@ -88,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     item.init();
 
-    if ( itemsList.length ) {
-        itemsList.forEach(element => {
+    if ( itemsList.items.length ) {
+        itemsList.items.forEach(element => {
             divItemsList.appendChild( item.new( element.text, element.value ) );
 
         });

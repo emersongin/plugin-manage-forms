@@ -37,17 +37,7 @@
 
         private function load_data( $path ) {
             $content = json_decode( file_get_contents( MGF_DIR_DATA . $path ), true );
-
-            if ( isset( $content['scripts'] ) ) {
-                new Script_JS( $content['scripts'], new Script_JS_Register(), new Script_Validator() );
-
-            }
-
-            if ( isset( $content['styles'] ) ) {
-                new Style_Sheet( $content['scripts'], new Style_Sheet_Register(), new Script_Validator() );
-
-            }
-
+            
             return $content;
 
         }

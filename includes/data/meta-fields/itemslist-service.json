@@ -1,11 +1,13 @@
 
 {
     "tag": "div",
+    "insert_value": true,
     "text": {
         "value": "Items List",
         "priority": "before"
     },
     "attributes": {
+        "id": "list_items",
         "class": ["wrap"],
         "style": [
             "background-color: #B4B9BE;",
@@ -71,20 +73,7 @@
         "object_name": "itemsList",
         "object_params": {
             "id": "list-items",
-            "items": [
-                {
-                    "text": "item 1",
-                    "value":200
-                },
-                {
-                    "text": "item 2",
-                    "value":150
-                },
-                {
-                    "text": "item 3",
-                    "value":10.5
-                }
-            ]
+            "items": []
         }
     }
 }
