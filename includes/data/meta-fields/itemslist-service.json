@@ -1,7 +1,7 @@
 
 {
     "tag": "div",
-    "insert_value": true,
+    "insert_value": "script",
     "text": {
         "value": "Items List",
         "priority": "before"

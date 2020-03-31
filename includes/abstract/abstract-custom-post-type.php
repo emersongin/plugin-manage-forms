@@ -11,6 +11,7 @@
         private $menu_icon = 'none';
         private $supports = array();
         private $meta_boxes = array();
+        private $save_post_fields = array();
         protected $elements_factory = null;
 
         public function __construct( Array $post_type_data, Interface_Elements_Factory $elements_factory ) {
@@ -23,6 +24,7 @@
             $this->supports = $post_type_data['supports'];
             $this->meta_boxes = $post_type_data['meta_boxes'];
             $this->wp_list = $post_type_data['wp_list'];
+            $this->save_post_fields = $post_type_data['save_post'];
             $this->elements_factory = $elements_factory;
 
             add_filter( "manage_{$this->name}_posts_columns", array( $this, 'wp_list_header' ) );
@@ -159,27 +161,52 @@
     
         }
 
-        public function save_post_type( $post_id ){
+        public function save_post_type( $post_id ) {
             global $post;
+            $post_fields = array();
             $item_list = array();
 
-            if ( $post->post_type != $this->name ){
+            if ( isset( $post->post_type ) and $post->post_type != $this->name ) {
                 return;
+            }
+
+            if ( isset( $_POST['hidden_post_status'] ) ) {
+                $post_fields = $this->save_post_fields[ $_POST[ 'hidden_post_status' ] ];
+
+                foreach ( $post_fields as $post_field ) {
+                    switch ( $post_field ) {
+                        case 'service_items':
+                            if ( isset( $_POST['item_service_text'] ) and count( $_POST['item_service_text'] ) ) {
                 
+                                foreach ( $_POST['item_service_text'] as $key => $value ) {
+                                    $item_list[] = array(
+                                        'text' => $value,
+                                        'value' => $_POST['item_service_value'][$key]
+                                    );
+                
+                                }
+                
+                            }
+
+                            if ( count( $item_list ) ) {
+                                update_post_meta( $post_id, '_list_items', $item_list );
+                
+                            }
+
+                            break;
+                        
+                        default:
+                            if ( isset( $_POST[ $post_field ] ) ) {
+                                update_post_meta( $post_id, "_{$post_field}", $_POST[ $post_field ] );
+                
+                            }
+                            break;
+
+                    }
+                }
+
             }
 
-            foreach ( $_POST['item_service_text'] as $key => $value ) {
-                $item_list[] = array(
-                    'text' => $value,
-                    'value' => $_POST['item_service_value'][$key]
-                );
-            }
-            
-            // Update the meta field in the database.
-            update_post_meta( $post_id, '_service_title', $_POST['service_title'] );
-            update_post_meta( $post_id, '_list_items', $item_list );
-
-            
         }
 
     }

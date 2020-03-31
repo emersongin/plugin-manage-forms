@@ -23,5 +23,32 @@
     "description": "Any things...",
     "public": true,
     "supports": ["title","editor"],
-    "meta_boxes": []
+    "meta_boxes": [],
+    "save_post": {
+        "draft": [
+            "title",
+            "content",
+            "status",
+            "expiration_time",
+            "secret_key",
+            "service_title",
+            "service_items",
+            "service_parcel",
+            "contract_id",
+            "origin",
+            "document_create_by",
+            "document_create_at"
+        ],
+        "publish": [
+            "title",
+            "content",
+            "expiration_time",
+            "service_title",
+            "service_items",
+            "service_parcel",
+            "contract_id"
+        ],
+        "finish": []
+    }
 }
+

@@ -19,8 +19,10 @@
             "inner_elements": [
                 {
                     "tag": "select",
+                    "insert_value": "select",
                     "attributes": {
                         "id": "expiration_time",
+                        "name": "expiration_time",
                         "style": ["width: 300px;"]
                     },
                     "inner_elements": [
@@ -31,7 +33,7 @@
                                 "priority": "before"
                             },
                             "attributes": {
-                                "value": "",
+                                "value": "0",
                                 "disabled": "true",
                                 "selected": "true"
                             }
@@ -54,6 +56,76 @@
                             },
                             "attributes": {
                                 "value": "2"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "3 Horas",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "3"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "8 Horas",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "4"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "1 Dia",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "5"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "3 Dias",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "6"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "7 Dias",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "7"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "15 Dias",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "8"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "30 Dias",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "9"
                             }
                         }
                     ]

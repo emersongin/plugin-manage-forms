@@ -17,7 +17,7 @@
         },
         {
             "tag": "input",
-            "insert_value": true,
+            "insert_value": "value",
             "attributes": {
                 "id": "service_title",
                 "name": "service_title",

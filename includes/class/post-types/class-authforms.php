@@ -27,7 +27,8 @@
 
         public function render_meta_boxes( $post, $meta_box ) {
             $field = null;
-            $data = array();
+
+            echo get_post_meta( $post->ID, "_post", true );
 
             foreach ( $meta_box['args'] as $key => $meta_field ) {
                 if ( $meta_field['tag'] ) {
@@ -111,17 +112,35 @@
         private function add_value( $post, $meta_field ) {
             $data = '';
 
-            switch ( $meta_field['tag'] ) {
-                case 'input':
+            switch ( $meta_field['insert_value'] ) {
+                case 'value':
                     $slug = $meta_field['attributes']['id'];
                     $data = get_post_meta( $post->ID, "_{$slug}", true );
                     $meta_field['attributes']['value'] = $data;
                     break;
 
-                case 'div':
+                case 'script':
                     $slug = $meta_field['attributes']['id'];
                     $data = get_post_meta( $post->ID, "_{$slug}", true );
                     $meta_field['scripts']['object_params']['items'] = $data;
+                    break;
+
+                case 'select':
+                    $slug = $meta_field['attributes']['id'];
+                    $data = get_post_meta( $post->ID, "_{$slug}", true );
+
+                    for ( $index = 0; $index < count( $meta_field['inner_elements'] ); $index++) { 
+                        if ( $meta_field['inner_elements'][$index]['attributes']['value'] == $data ) {
+                            $meta_field['inner_elements'][$index]['attributes']['selected'] = true;
+
+                        } 
+
+                    }
+
+                    break;
+
+                case 'select-wp-list':
+
                     break;
                 default:
                     # code...

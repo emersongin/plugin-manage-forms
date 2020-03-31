@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.inputText.required = true;
 
             this.inputValue.setAttribute("type", "number");
+            this.inputValue.setAttribute("step", "0.01");
             this.inputValue.setAttribute("name", "item_service_value[]");
             this.inputValue.setAttribute("placeholder", "item value");
             this.inputValue.required = true;

@@ -136,19 +136,6 @@ class Plugin_Manager {
             $metabox_setting
         ];
 
-        // 'title',
-        // 'content',
-        // 'status',
-        // 'expiration_time',
-        // 'secret_key',
-        // 'service_title',
-        // 'service_items',
-        // 'service_parcel',
-        // 'contract_id',
-        // 'origin',
-        // 'document_create_by',
-        // 'document_create_at'
-
         $auth_forms = new AuthForms_Post_Type( $auth_forms, new Elements_Factory() );
 
         $register = new Post_Type_Register();

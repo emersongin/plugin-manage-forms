@@ -17,8 +17,10 @@
             "inner_elements": [
                 {
                     "tag": "select",
+                    "insert_value": "select",
                     "attributes": {
                         "id": "contract_id",
+                        "name": "contract_id",
                         "style": ["width: 300px;"]
                     },
                     "inner_elements": [
@@ -42,6 +44,16 @@
                             },
                             "attributes": {
                                 "value": "1"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "termo 02",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "2"
                             }
                         }
                     ]

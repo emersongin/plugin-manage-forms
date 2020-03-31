@@ -17,8 +17,10 @@
             "inner_elements": [
                 {
                     "tag": "select",
+                    "insert_value": "select",
                     "attributes": {
                         "id": "service_parcel",
+                        "name": "service_parcel",
                         "style": ["width: 300px;"]
                     }
                     ,
@@ -53,6 +55,106 @@
                             },
                             "attributes": {
                                 "value": "2"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 3x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "3"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 4x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "4"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 5x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "5"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 6x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "6"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 7x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "7"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 8x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "8"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 9x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "9"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 10x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "10"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 11x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "11"
+                            }
+                        },
+                        {
+                            "tag": "option",
+                            "text": {
+                                "value": "( 12x parcela )",
+                                "priority": "before"
+                            },
+                            "attributes": {
+                                "value": "12"
                             }
                         }
                     ]
