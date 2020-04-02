@@ -30,19 +30,19 @@
 
             //echo "post: " . get_post_meta( $post->ID, "_post", true ) . "<br>";
             
-            echo "title: " . get_the_title() . "<br>";
-            echo "content: " . get_post_meta( $post->ID, "_content", true ) . "<br>";
-            echo "status: " . get_post_meta( $post->ID, "_status", true ) . "<br>";
-            echo "expiration_time: " . get_post_meta( $post->ID, "_expiration_time", true ) . "<br>";
-            echo "secret_key: " . get_post_meta( $post->ID, "_secret_key", true ) . "<br>";
-            echo "service_title: " . get_post_meta( $post->ID, "_service_title", true ) . "<br>";
-            echo "service_items: " . json_encode( get_post_meta( $post->ID, "_service_items", true ) ) . "<br>";
-            echo "service_expiration_time: " . get_post_meta( $post->ID, "_service_expiration_time", true ) . "<br>";
-            echo "service_parcel: " . get_post_meta( $post->ID, "_service_parcel", true ) . "<br>";
-            echo "contract_id: " . get_post_meta( $post->ID, "_contract_id", true ) . "<br>";
-            echo "origin: " . json_encode( get_post_meta( $post->ID, "_origin", true ) ) . "<br>";
-            echo "document_create_by: " . get_post_meta( $post->ID, "_document_create_by", true ) . "<br>";
-            echo "document_create_at: " . get_post_meta( $post->ID, "_document_create_at", true ) . "<br>";
+            // echo "title: " . get_the_title() . "<br>";
+            // echo "content: " . get_post_meta( $post->ID, "_content", true ) . "<br>";
+            // echo "status: " . get_post_meta( $post->ID, "_status", true ) . "<br>";
+            // echo "expiration_time: " . get_post_meta( $post->ID, "_expiration_time", true ) . "<br>";
+            // echo "secret_key: " . get_post_meta( $post->ID, "_secret_key", true ) . "<br>";
+            // echo "service_title: " . get_post_meta( $post->ID, "_service_title", true ) . "<br>";
+            // echo "service_items: " . json_encode( get_post_meta( $post->ID, "_service_items", true ) ) . "<br>";
+            // echo "service_expiration_time: " . get_post_meta( $post->ID, "_service_expiration_time", true ) . "<br>";
+            // echo "service_parcel: " . get_post_meta( $post->ID, "_service_parcel", true ) . "<br>";
+            // echo "contract_id: " . get_post_meta( $post->ID, "_contract_id", true ) . "<br>";
+            // echo "origin: " . json_encode( get_post_meta( $post->ID, "_origin", true ) ) . "<br>";
+            // echo "document_create_by: " . get_post_meta( $post->ID, "_document_create_by", true ) . "<br>";
+            // echo "document_create_at: " . get_post_meta( $post->ID, "_document_create_at", true ) . "<br>";
 
             foreach ( $meta_box['args'] as $key => $meta_field ) {
                 if ( $meta_field['tag'] ) {

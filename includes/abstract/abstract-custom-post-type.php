@@ -98,17 +98,17 @@
 
                     break;
                 case 'status':
-                    $status = get_post_meta( $post_id, '_doc_status', true );
+                    $status = get_post_meta( $post_id, '_status', true );
                     echo $status;
 
                     break;
                 case 'value':
-                    $value = get_post_meta( $post_id, '_doc_value', true );
-                    echo $value;
+                    $value = get_post_meta( $post_id, '_service_items', true );
+                    echo json_encode( $value );
 
                     break;
                 case 'expiration':
-                    $expiration = get_post_meta( $post_id, '_doc_expiration', true );
+                    $expiration = get_post_meta( $post_id, '_expiration_time', true );
                     echo $expiration;
 
                     break;
@@ -117,7 +117,7 @@
 
                     break;
                 case 'created':
-                    $create_by = get_post_meta( $post_id, '_doc_create_by', true );
+                    $create_by = get_post_meta( $post_id, '_document_create_by', true );
                     echo $create_by;
 
                     break;
