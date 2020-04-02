@@ -21,8 +21,8 @@
                     "tag": "select",
                     "insert_value": "select",
                     "attributes": {
-                        "id": "expiration_time",
-                        "name": "expiration_time",
+                        "id": "service_expiration_time",
+                        "name": "service_expiration_time",
                         "style": ["width: 300px;"]
                     },
                     "inner_elements": [
@@ -71,7 +71,7 @@
                         {
                             "tag": "option",
                             "text": {
-                                "value": "8 Horas",
+                                "value": "12 Horas",
                                 "priority": "before"
                             },
                             "attributes": {
@@ -121,7 +121,7 @@
                         {
                             "tag": "option",
                             "text": {
-                                "value": "30 Dias",
+                                "value": "1 Mês",
                                 "priority": "before"
                             },
                             "attributes": {

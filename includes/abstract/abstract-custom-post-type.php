@@ -164,49 +164,24 @@
         public function save_post_type( $post_id ) {
             global $post;
             $post_fields = array();
-            $item_list = array();
+            $post_status = isset( $_POST['hidden_post_status'] ) ? $_POST['hidden_post_status'] : false ;
 
-            if ( isset( $post->post_type ) and $post->post_type != $this->name ) {
-                return;
-            }
+            if ( isset( $post->post_type ) and $post->post_type != $this->name ) { return; }
 
-            if ( isset( $_POST['hidden_post_status'] ) ) {
-                $post_fields = $this->save_post_fields[ $_POST[ 'hidden_post_status' ] ];
+            if ( $post_status ) {
+                $post_fields = $this->save_post_fields[ $post_status ];
 
                 foreach ( $post_fields as $post_field ) {
-                    switch ( $post_field ) {
-                        case 'service_items':
-                            if ( isset( $_POST['item_service_text'] ) and count( $_POST['item_service_text'] ) ) {
-                
-                                foreach ( $_POST['item_service_text'] as $key => $value ) {
-                                    $item_list[] = array(
-                                        'text' => $value,
-                                        'value' => $_POST['item_service_value'][$key]
-                                    );
-                
-                                }
-                
-                            }
+                    $this->save_meta_type( $post_id, $post_status, $post_field );
 
-                            if ( count( $item_list ) ) {
-                                update_post_meta( $post_id, '_list_items', $item_list );
-                
-                            }
-
-                            break;
-                        
-                        default:
-                            if ( isset( $_POST[ $post_field ] ) ) {
-                                update_post_meta( $post_id, "_{$post_field}", $_POST[ $post_field ] );
-                
-                            }
-                            break;
-
-                    }
                 }
 
             }
 
+        }
+
+        protected function save_meta_type( $post_id, $post_status, $post_field ) {
+            //...
         }
 
     }

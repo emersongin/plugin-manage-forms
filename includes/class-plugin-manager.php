@@ -25,9 +25,10 @@ class Plugin_Manager {
         define( 'MGF_ADMIN_URL', admin_url( '', MG_FORMS_FILE ) );
 
         define( 'MGF_DIR_ABSTRACT', MGF_DIR . '/includes/abstract/' );
-        define( 'MGF_DIR_CLASS', MGF_DIR . '/includes/class/' );
+        define( 'MGF_DIR_CLASS', MGF_DIR . '/includes/classes/' );
         define( 'MGF_DIR_INTERFACE', MGF_DIR . '/includes/interface/' );
         define( 'MGF_DIR_DATA', MGF_DIR . '/includes/data/' );
+        define( 'MGF_DIR_STATIC', MGF_DIR . '/includes/static/' );
         
         define( 'MGF_DIR_ASSETS', MGF_URL . '/assets/' );
         define( 'TEXT_DOMAIN', 'plugin-manage-forms' );
@@ -35,6 +36,9 @@ class Plugin_Manager {
     }
 
     private function create_class() {
+        //static
+        require_once MGF_DIR_STATIC . 'static-user-info.php';
+
         //interfaces
         require_once MGF_DIR_INTERFACE . 'interface-script.php';
         require_once MGF_DIR_INTERFACE . 'interface-script-validator.php';

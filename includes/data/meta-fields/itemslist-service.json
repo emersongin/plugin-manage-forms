@@ -7,7 +7,7 @@
         "priority": "before"
     },
     "attributes": {
-        "id": "list_items",
+        "id": "service_items",
         "class": ["wrap"],
         "style": [
             "background-color: #B4B9BE;",
